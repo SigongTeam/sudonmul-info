@@ -5,12 +5,12 @@
     </div>
 
     <div class="right-column">
-      <div class="date">
+      <div class="timestamp">
         {{ago}}
       </div>
 
-      <div class="text">
-        {{text}}
+      <div class="message">
+        {{message}}
       </div>
     </div>
   </div>
@@ -32,45 +32,45 @@
       padding: 10px;
     }
 
-    & .text {
+    & .message {
       font-size: 1.4rem;
     }
 
-    & .date {
+    & .timestamp {
       font-size: 1rem;
     }
   }
 </style>
 
 <script>
-  import moment from "moment"
+import moment from "moment"
 
-  export default {
-    props: {
-      rating: {
-        type: Number,
-        required: true
-      },
-
-      text: {
-        type: String,
-        required: true
-      },
-
-      date: {
-        type: String,
-        required: true
-      }
+export default {
+  props: {
+    rating: {
+      type: Number,
+      required: true
     },
 
-    computed: {
-      emoji() {
-        return [':(', ':|', ':)'][this.rating]
-      },
+    text: {
+      type: String,
+      required: true
+    },
 
-      ago() {
-        return moment(this.date).fromNow();
-      }
+    timestamp: {
+      type: String,
+      required: true
+    }
+  },
+
+  computed: {
+    emoji () {
+      return [':(', ':|', ':)'][this.rating]
+    },
+
+    ago () {
+      return moment(this.timestamp).fromNow()
     }
   }
+}
 </script>

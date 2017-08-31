@@ -6,11 +6,13 @@
           <div class="text">:(</div>
         </div>
       </div>
+
       <div class="progress-container">
         <div class="graph" ref="norm">
           <div class="text">:|</div>
         </div>
       </div>
+
       <div class="progress-container">
         <div class="graph" ref="smile">
           <div class="text">:)</div>
@@ -20,7 +22,12 @@
 
     <div class="comment-list">
       <template v-for="comment in comments">
-        <comment :rating="comment.rating" :text="comment.text"></comment>
+        <comment
+          :key="comment.location"
+          :rating="comment.rating"
+          :message="comment.message"
+          :timestamp="comment.timestamp">
+        </comment>
         <hr>
       </template>
     </div>
@@ -63,41 +70,43 @@
 </style>
 
 <script>
-  import Comment from "./Comment.vue";
-  import ProgressBar from "progressbar.js";
+import Comment from './Comment.vue'
+import ProgressBar from 'progressbar.js'
 
-  export default {
-    props: {
-      comments: {
-        type: Array,
-        required: true
-      }
-    },
+const emojiNames = ['frown', 'norm', 'smile']
+const options = {
+  color: '#2f493e',
+  strokeWidth: 4,
+  trailWidth: 1,
+  easing: 'easeInOut',
+  duration: 1400,
+  text: { autoStyleContainer: false }
+}
 
-    components: {
-      Comment
-    },
-
-    computed: {
-      ratingMap() {
-        return ['frown', 'norm', 'smile'];
-      }
-    },
-
-    mounted() {
-      this.ratingMap.forEach((v, i) => {
-        const bar = new ProgressBar.Circle(this.$refs[v], {
-          color: '#2f493e',
-          strokeWidth: 4,
-          trailWidth: 1,
-          easing: 'easeInOut',
-          duration: 1400,
-          text: {
-            autoStyleContainer: false
-          }
-        })
-        bar.animate(this.comments.filter((v) => v.rating === i).length / this.comments.length)
-      })
+export default {
+  props: {
+    comments: {
+      type: Array,
+      required: true
     }
+  },
+
+  data: () => ({ bars: [] }),
+
+  components: {
+    Comment
+  },
+
+  mounted () {
+    emojiNames.forEach((emoji, rating) =>
+      (this.bars[rating] = new ProgressBar.Circle(this.$refs[emoji], options)))
+  },
+
+  updated () {
+    this.bars.forEach((bar, rating) => {
+      const sameRatings = this.comments.filter(c => c.rating === rating)
+      bar.animate(sameRatings.length / this.comments.length)
+    })
   }
+}
 </script>
