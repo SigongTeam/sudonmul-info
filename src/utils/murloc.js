@@ -1,6 +1,6 @@
-const Kwater = require('k-live-water')
+// const Kwater = require('k-live-water')
 const rp = require('request-promise')
-const ENDPOINT_URI = 'https://maps.googleapis.com/maps/api/geocode/json';
+const ENDPOINT_URI = 'https://maps.googleapis.com/maps/api/geocode/json'
 
 module.exports = class Murloc {
   constructor (key) {
@@ -10,7 +10,7 @@ module.exports = class Murloc {
   /**
    * @param {String} juso 도로명 주소
    */
-  async fetchGeocode(juso) {
+  async fetchGeocode (juso) {
     const r = await rp({
       uri: ENDPOINT_URI,
       qs: {
