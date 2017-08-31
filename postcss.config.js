@@ -1,20 +1,20 @@
 const path = require('path')
-const cssImport = require('postcss-import')
+const importPlugin = require('postcss-import')
 const createResolver = require('postcss-import-webpack-resolver')
+
+const resolve = createResolver({
+  alias: {
+    '@css': path.resolve(__dirname, 'app', 'css')
+  }
+})
 
 module.exports = {
   plugins: [
-    require('postcss-browser-reporter'),
-    require('postcss-reporter'),
+    importPlugin({ resolve }),
     require('postcss-cssnext'),
-    require('postcss-url'),
 
-    cssImport({
-      resolve: createResolver({
-        alias: {
-          '@css': path.resolve(__dirname, 'app', 'css')
-        }
-      })
-    })
+    require('postcss-url'),
+    require('postcss-reporter'),
+    require('postcss-browser-reporter')
   ]
 }
