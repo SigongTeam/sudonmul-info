@@ -18,9 +18,12 @@
       </div>
     </div>
 
-    <template v-for="comment in comments">
-      <comment :rating="comment.rating" :text="comment.text"></comment>
-    </template>
+    <div class="comment-list">
+      <template v-for="comment in comments">
+        <comment :rating="comment.rating" :text="comment.text"></comment>
+        <hr>
+      </template>
+    </div>
   </section>
 </template>
 
@@ -32,10 +35,18 @@
     justify-content: space-between;
   }
 
+  .comment-list {
+    background: #fff;
+  }
+
+  hr {
+    margin: 0 .1rem;
+  }
+
   .progress-container .graph {
     flex: 1;
     padding: 20px;
-    
+
     position: relative;
 
     & .text {

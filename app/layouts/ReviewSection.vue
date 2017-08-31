@@ -9,7 +9,6 @@
   @import "@vars";
   .review-section {
     background: var(--review-background);
-    height: 40vh;
 
     & h2 {
       font-weight: 600;
