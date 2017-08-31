@@ -6,7 +6,7 @@
 </template>
 
 <style scoped>
-  @import "@css/variables";
+  @import "@vars";
   .review-section {
     background: var(--review-background);
   }

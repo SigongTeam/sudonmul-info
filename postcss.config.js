@@ -4,7 +4,7 @@ const createResolver = require('postcss-import-webpack-resolver')
 
 const resolve = createResolver({
   alias: {
-    '@css': path.resolve(__dirname, 'app', 'css')
+    '@vars': path.resolve(__dirname, 'app', 'css', 'variables.css')
   }
 })
 

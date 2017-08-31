@@ -3,6 +3,7 @@
 </template>
 
 <style>
+  @import "@vars";
 </style>
 
 <script>

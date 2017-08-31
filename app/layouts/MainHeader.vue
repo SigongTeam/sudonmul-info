@@ -5,11 +5,10 @@
 </template>
 
 <style scoped>
-  @import "@css/variables";
+  @import "@vars";
   .main-header {
     background-color: var(--header-background);
     height: 20vh;
-    font-family: var(--font);
     font-size: 5rem;
     color: #fff;
   }

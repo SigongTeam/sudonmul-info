@@ -7,10 +7,8 @@
     "lint": "eslint --fix . --ext .js,.vue",
     "compile": "webpack --progress --hide-modules",
     "test": "npm run lint && npm run compile",
-
     "backend": "node .",
     "frontend": "webpack-dev-server --hot",
-
     "dev": "npm run lint && npm run frontend",
     "start": "npm run test && npm run backend"
   },
@@ -73,10 +71,10 @@
     "koa-static": "^4.0.1",
     "mdi": "^2.0.46",
     "mongoose": "^4.11.9",
+    "skeleton-css": "^2.0.4",
     "typeface-spoqa-han-sans2": "^2.1.2",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0",
-    "vuetify": "^0.15.0-beta.5",
     "vuex": "^2.4.0",
     "whatwg-fetch": "^2.0.3"
   }
