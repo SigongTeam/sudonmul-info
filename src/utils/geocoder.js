@@ -2,8 +2,8 @@
 const rp = require('request-promise')
 const ENDPOINT_URI = 'https://maps.googleapis.com/maps/api/geocode/json'
 
-module.exports = class Murloc {
-  constructor (key) {
+module.exports = class Geocoder {
+  constructor ({ key }) {
     this.key = key
   }
 
