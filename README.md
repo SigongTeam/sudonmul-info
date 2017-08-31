@@ -7,15 +7,19 @@ Gives information about tap water.
 
 ## Usage
 ```bash
+# install dependencies
 $ npm install
 
-# eslint
-$ npm run lint
+# create .env file
+echo 'MONGODB_URI=mongodb://hello.world:1234/wow' > .env
 
-# development (hot)
+# create self-signed certificate
+$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+
+# development (hot module replacement enabled)
 $ npm run dev
 
-# production (backend only)
+# production (back-end only)
 $ npm start
 ```
 
