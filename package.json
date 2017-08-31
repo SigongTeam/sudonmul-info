@@ -1,0 +1,24 @@
+{
+  "name": "sudonmul",
+  "version": "0.1.0",
+  "description": "Gives information about tap water.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SigongTeam/sudonmul-info.git"
+  },
+  "keywords": [
+    "Hackathon",
+    "TapWater",
+    "water"
+  ],
+  "author": "SigongTeam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SigongTeam/sudonmul-info/issues"
+  },
+  "homepage": "https://github.com/SigongTeam/sudonmul-info#readme"
+}
