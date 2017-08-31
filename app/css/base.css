@@ -1,8 +1,10 @@
 @import "@vars";
 
-@import "typeface-spoqa-han-sans2";
 @import "skeleton-css/css/normalize.css";
 @import "skeleton-css/css/skeleton.css";
+
+@import "typeface-spoqa-han-sans2";
+@import "mdi/css/materialdesignicons.min.css";
 
 html, body {
   font-family: var(--font);

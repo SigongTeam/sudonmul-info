@@ -3,7 +3,7 @@
 </template>
 
 <style scoped>
-  @import "@css/variables";
+  @import "@vars";
 </style>
 
 <script>
