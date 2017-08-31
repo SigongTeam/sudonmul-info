@@ -2,12 +2,13 @@
   "name": "sudonmul",
   "version": "0.1.0",
   "description": "Gives information about tap water.",
-  "main": "app/app.js",
+  "main": "src/index.js",
   "scripts": {
     "lint": "eslint --fix . --ext .js,.vue",
-    "dev": "npm run lint && webpack-dev-server . --hot",
-    "compile": "npm run lint && webpack --progress --hide-modules",
-    "start": "npm run compile && node src/index.js"
+    "compile": "webpack --progress --hide-modules",
+    "test": "npm run lint && npm run compile",
+    "dev": "npm run test && webpack-dev-server . --hot",
+    "start": "npm run test && node ."
   },
   "repository": {
     "type": "git",
@@ -66,6 +67,7 @@
     "koa-router": "^7.2.1",
     "koa-static": "^4.0.1",
     "mdi": "^2.0.46",
+    "mongoose": "^4.11.9",
     "typeface-spoqa-han-sans2": "^2.1.2",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0",
