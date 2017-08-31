@@ -1,16 +1,21 @@
-const path = require('path')
-const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+import path from 'path'
+import webpack from 'webpack'
+import HtmlPlugin from 'html-webpack-plugin'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
+
+const entry = './app/app.js'
+
+const output = {
+  filename: 'bundle.js',
+  path: path.resolve(__dirname, 'dist')
+}
 
 const plugins = [
   new ExtractTextPlugin('bundle.css'),
+  new HtmlPlugin({ template: 'app/app.html' }),
 
-  new webpack.optimize.UglifyJsPlugin({
-    sourceMap: true,
-    compress: { warnings: false }
-  }),
-
-  new webpack.LoaderOptionsPlugin({ minimize: true })
+  new webpack.LoaderOptionsPlugin({ minimize: true }),
+  new webpack.optimize.UglifyJsPlugin({ sourceMap: true, compress: { warnings: false } })
 ]
 
 const loaders = {
@@ -53,23 +58,20 @@ const alias = {
 }
 
 const devServer = {
-    hot: true,
-    port: 8888,
-    host: '0.0.0.0',
-    historyApiFallback: true
-  }
+  hot: true,
+  port: 8888,
+  host: '0.0.0.0',
+  historyApiFallback: true
+}
 
 module.exports = {
-  entry: './app/app.js',
-
-  output: {
-    publicPath: '/dist/',
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
+  entry,
+  output,
 
   plugins,
   module: { rules },
   resolve: { alias },
-  devServer
+
+  devServer,
+  devtool: '#eval-source-map'
 }

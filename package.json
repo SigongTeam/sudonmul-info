@@ -2,17 +2,19 @@
   "name": "sudonmul",
   "version": "0.1.0",
   "description": "Gives information about tap water.",
-  "main": "index.js",
+  "main": "app/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint . --ext .js,.vue",
+    "dev": "npm run lint && webpack-dev-server . --hot",
+    "compile": "npm run lint && webpack --progress --hide-modules"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SigongTeam/sudonmul-info.git"
   },
   "keywords": [
-    "Hackathon",
-    "TapWater",
+    "hackathon",
+    "tap-water",
     "water"
   ],
   "author": "SigongTeam",
@@ -23,12 +25,24 @@
   "homepage": "https://github.com/SigongTeam/sudonmul-info#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-1": "^6.24.1",
+    "babel-register": "^6.26.0",
     "css-loader": "^0.28.7",
+    "eslint": "^4.5.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-vue": "^2.0.2",
+    "eslint-plugin-html": "^3.2.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^2.1.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.30.1",
     "postcss-browser-reporter": "^0.5.0",
     "postcss-cssnext": "^3.0.2",
     "postcss-loader": "^2.0.6",
@@ -36,6 +50,7 @@
     "postcss-url": "^7.1.2",
     "style-loader": "^0.18.2",
     "vue-loader": "^13.0.4",
+    "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.4.2",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"

@@ -1,0 +1,9 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "extends": ["standard"],
+  "plugins": ["html", "vue"]
+}
