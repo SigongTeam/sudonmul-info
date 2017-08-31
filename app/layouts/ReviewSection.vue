@@ -31,7 +31,7 @@ export default {
   created () {
     fetch('/review')
       .then(res => res.json())
-      .then(json => (this.dummy = json.slice(0, 15)))
+      .then(json => (this.dummy = json))
       .catch(err => alert(err))
   }
 }

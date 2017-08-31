@@ -51,7 +51,6 @@
   .progress-container .graph {
     flex: 1;
     padding: 20px;
-
     position: relative;
 
     & .text {
@@ -60,8 +59,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-family: var(--font);
-      font-size: 2rem;
+      font-size: 7rem;
       font-weight: 600;
     }
   }
@@ -76,8 +74,8 @@ const options = {
   color: '#2f493e',
   strokeWidth: 4,
   trailWidth: 1,
-  easing: 'easeInOut',
   duration: 1400,
+  easing: 'easeInOut',
   text: { autoStyleContainer: false }
 }
 
