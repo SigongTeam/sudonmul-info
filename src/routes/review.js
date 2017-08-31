@@ -1,5 +1,5 @@
 const Router = require('koa-router')
-const Review = require('../models/review')
+const Review = require('../models/Review')
 
 module.exports = new Router({ prefix: '/review' })
   .get('/', async (ctx, next) =>

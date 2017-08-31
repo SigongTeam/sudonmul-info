@@ -29,7 +29,7 @@ function startApp () {
   const port = process.env.PORT || 8080
   const dist = path.join(__dirname, '..', 'dist')
 
-  new Koa()
+  return new Koa()
     .use(logger())
     .use(conditional())
     .use(etag())
@@ -40,4 +40,6 @@ function startApp () {
     .listen(port, () => console.log(`Listening on port ${port}`))
 }
 
-connectDatabase().then(startApp)
+connectDatabase()
+  .then(startApp)
+  .then(require('./dummy'))
