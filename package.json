@@ -7,8 +7,12 @@
     "lint": "eslint --fix . --ext .js,.vue",
     "compile": "webpack --progress --hide-modules",
     "test": "npm run lint && npm run compile",
-    "dev": "npm run test && webpack-dev-server . --hot",
-    "start": "npm run test && node ."
+
+    "backend": "node .",
+    "frontend": "webpack-dev-server . --hot",
+
+    "dev": "npm run test && npm run frontend",
+    "start": "npm run test && npm run backend"
   },
   "repository": {
     "type": "git",
@@ -59,6 +63,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "dotenv": "^4.0.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-chalk-logger": "^1.0.0",
