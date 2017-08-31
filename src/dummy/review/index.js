@@ -1,5 +1,5 @@
 const count = 2
-const Review = require('../models/Review')
+const Review = require('../../models/Review')
 
 const ips = require('./ips')
 const ratings = require('./ratings')
