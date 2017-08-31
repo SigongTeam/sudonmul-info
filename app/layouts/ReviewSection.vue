@@ -30,7 +30,6 @@ export default {
   data: () => ({ dummy: [] }),
 
   created () {
-    alert('wowowow')
     fetch('/review')
       .then(res => res.json())
       .then(json => (this.dummy = json.slice(0, 15)))

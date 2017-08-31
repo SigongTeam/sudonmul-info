@@ -6,11 +6,13 @@
           <div class="text">:(</div>
         </div>
       </div>
+
       <div class="progress-container">
         <div class="graph" ref="norm">
           <div class="text">:|</div>
         </div>
       </div>
+
       <div class="progress-container">
         <div class="graph" ref="smile">
           <div class="text">:)</div>
@@ -18,9 +20,11 @@
       </div>
     </div>
 
-    <template v-for="comment in comments">
-      <comment :rating="comment.rating" :message="comment.message" :key="comment.location"></comment>
-    </template>
+    <comment v-for="comment in comments"
+      :key="comment.location"
+      :rating="comment.rating"
+      :message="comment.message">
+    </comment>
   </section>
 </template>
 
