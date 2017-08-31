@@ -8,7 +8,7 @@
     "fix": "npm run lint -- --fix",
     "compile": "webpack --progress --hide-modules",
     "backend": "node .",
-    "frontend": "webpack-dev-server --hot",
+    "frontend": "webpack-dev-server --hot --https --cert ./cert.pem --key ./key.pem",
     "test": "npm run lint && npm run compile",
     "dev": "npm run lint && concurrently \"npm run frontend\" \"npm run backend\"",
     "start": "npm test && npm run backend"
@@ -73,6 +73,7 @@
     "koa-conditional-get": "^2.0.0",
     "koa-etag": "^3.0.0",
     "koa-router": "^7.2.1",
+    "koa-sslify": "^2.1.2",
     "koa-static": "^4.0.1",
     "mdi": "^2.0.46",
     "moment": "^2.18.1",
