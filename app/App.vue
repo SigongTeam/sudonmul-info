@@ -1,11 +1,13 @@
 <template>
-  <main id="app">
+  <v-app id="app">
     <main-header></main-header>
-		<review-section></review-section>
-  </main>
+    <review-section></review-section>
+  </v-app>
 </template>
 
 <style scoped>
+  @import "vuetify/dist/vuetify.min.css";
+
   #app {
     display: flex;
     flex-direction: column;
@@ -16,7 +18,7 @@
 
 <script>
   import MainHeader from './layouts/MainHeader.vue'
-import ReviewSection from './layouts/ReviewSection.vue'
+  import ReviewSection from './layouts/ReviewSection.vue'
 
   export default {
     components: {

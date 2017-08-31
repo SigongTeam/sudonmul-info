@@ -2,12 +2,13 @@
   "name": "sudonmul",
   "version": "0.1.0",
   "description": "Gives information about tap water.",
-  "main": "app/app.js",
+  "main": "src/index.js",
   "scripts": {
     "lint": "eslint --fix . --ext .js,.vue",
-    "dev": "npm run lint && webpack-dev-server . --hot",
-    "compile": "npm run lint && webpack --progress --hide-modules",
-    "start": "npm run compile && node src/index.js"
+    "compile": "webpack --progress --hide-modules",
+    "test": "npm run lint && npm run compile",
+    "dev": "npm run test && webpack-dev-server . --hot",
+    "start": "npm run test && node ."
   },
   "repository": {
     "type": "git",
@@ -34,13 +35,11 @@
     "css-loader": "^0.28.7",
     "eslint": "^4.5.0",
     "eslint-config-standard": "^10.2.1",
-    "eslint-config-vue": "^2.0.2",
-    "eslint-plugin-html": "^3.2.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
-    "eslint-plugin-vue": "^2.1.0",
+    "eslint-plugin-vue": "^3.12.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.30.1",
@@ -68,9 +67,11 @@
     "koa-router": "^7.2.1",
     "koa-static": "^4.0.1",
     "mdi": "^2.0.46",
+    "mongoose": "^4.11.9",
     "typeface-spoqa-han-sans2": "^2.1.2",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0",
+    "vuetify": "^0.15.0-beta.5",
     "vuex": "^2.4.0",
     "whatwg-fetch": "^2.0.3"
   }

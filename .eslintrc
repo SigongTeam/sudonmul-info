@@ -1,12 +1,13 @@
 {
-  "parser": "babel-eslint",
   "env": {
     "node": true,
     "browser": true
   },
-  "extends": ["standard"],
-  "plugins": ["html", "vue"],
-  "rules": {
-    "no-new": "off"
+  "extends": [
+    "standard",
+    "plugin:vue/recommended"
+  ],
+  "parserOptions": {
+    "parser": "babel-eslint"
   }
 }
