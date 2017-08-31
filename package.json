@@ -61,10 +61,12 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "boom": "^5.2.0",
     "dotenv": "^4.0.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-chalk-logger": "^1.0.0",
+    "koa-compose": "^4.0.0",
     "koa-conditional-get": "^2.0.0",
     "koa-etag": "^3.0.0",
     "koa-router": "^7.2.1",
