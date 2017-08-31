@@ -71,6 +71,7 @@
     "koa-static": "^4.0.1",
     "mdi": "^2.0.46",
     "mongoose": "^4.11.9",
+    "progressbar.js": "^1.0.1",
     "skeleton-css": "^2.0.4",
     "typeface-spoqa-han-sans2": "^2.1.2",
     "vue": "^2.4.2",

@@ -1,7 +1,7 @@
 <template>
   <tap-section class="review-section">
-    <h1>리뷰</h1>
-    <comment-view></comment-view>
+    <h2>리뷰</h2>
+    <comment-view :comments="dummy"></comment-view>
   </tap-section>
 </template>
 
@@ -9,6 +9,11 @@
   @import "@vars";
   .review-section {
     background: var(--review-background);
+    height: 40vh;
+
+    & h2 {
+      font-weight: 600;
+    }
   }
 </style>
 
@@ -20,6 +25,20 @@ export default {
   components: {
     CommentView,
     TapSection
+  },
+
+  computed: {
+    dummy() {
+      return [
+        {rating: 2, text: "Hello, World!"},
+        {rating: 2, text: "Hello, World!"},
+        {rating: 2, text: "Hello, World!"},
+        {rating: 2, text: "Hello, World!"},
+        {rating: 1, text: "Hello, World!"},
+        {rating: 0, text: "Hello, World!"},
+        {rating: 0, text: "Hello, World!"}
+      ]
+    }
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <tap-section class="main-header" centered>
-    <icon icon="information-outline"></icon>
+    <icon icon="information-outline"></icon> 수돈물
   </tap-section>
 </template>
 
