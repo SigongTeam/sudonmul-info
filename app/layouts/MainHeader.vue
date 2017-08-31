@@ -13,16 +13,15 @@
 		height: 20vh;
 		font-family: var(--font);
 		font-size: 2rem;
-
 	}
 </style>
 
 <script>
-	import Icon from "../components/Icon.vue";
+	import Icon from '../components/Icon.vue'
 
-	export default {
-		components: {
-			Icon
-		}
-	};
+export default {
+	  components: {
+	    Icon
+	  }
+	}
 </script>
