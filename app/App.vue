@@ -60,7 +60,7 @@ export default {
   async created () {
     getCurrentPosition()
       .then(sendPosition)
-      .catch(err => alert('Geolocation error: ' + err))
+      .catch(err => alert('Geolocation error: ' + err.message))
   }
 }
 </script>
