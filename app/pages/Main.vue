@@ -1,9 +1,9 @@
 <template>
-	
+
 </template>
 
 <style>
-	@import "~variables";
+  @import "~variables";
 </style>
 
 <script>

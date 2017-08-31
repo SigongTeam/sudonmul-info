@@ -1,28 +1,27 @@
 <template>
-	<header class="main-header">
-		<icon icon="information-outline"></icon>
-	</header>
+  <header class="main-header">
+    <icon icon="information-outline"></icon>
+  </header>
 </template>
 
 <style>
-	@import "variables";
+  @import "variables";
 
-	.main-header {
-		background-color: var(--header-color);
-		width: 100%;
-		height: 20vh;
-		font-family: var(--font);
-		font-size: 2rem;
-
-	}
+  .main-header {
+    background-color: var(--header-color);
+    width: 100%;
+    height: 20vh;
+    font-family: var(--font);
+    font-size: 2rem;
+  }
 </style>
 
 <script>
-	import Icon from "../components/Icon.vue";
+  import Icon from '../components/Icon.vue'
 
-	export default {
-		components: {
-			Icon
-		}
-	};
+  export default {
+    components: {
+      Icon
+    }
+  }
 </script>
