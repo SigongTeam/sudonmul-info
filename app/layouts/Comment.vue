@@ -1,18 +1,21 @@
 <template>
-  <div class="comment">
-    <div class="emoji">
-      {{emoji}}
-    </div>
-
-    <div class="right-column">
-      <div class="timestamp">
-        {{ago}}
+  <div class="comment-wrapper">
+    <div class="comment">
+      <div class="emoji">
+        {{emoji}}
       </div>
 
-      <div class="message">
-        {{message}}
+      <div class="right-column">
+        <div class="timestamp">
+          {{ago}}
+        </div>
+
+        <div class="message">
+          {{message}}
+        </div>
       </div>
     </div>
+    <hr>
   </div>
 </template>
 
@@ -43,7 +46,7 @@
 </style>
 
 <script>
-import moment from "moment"
+import moment from 'moment'
 
 export default {
   props: {
@@ -52,7 +55,7 @@ export default {
       required: true
     },
 
-    text: {
+    message: {
       type: String,
       required: true
     },

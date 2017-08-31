@@ -21,15 +21,13 @@
     </div>
 
     <div class="comment-list">
-      <template v-for="comment in comments">
-        <comment
-          :key="comment.location"
-          :rating="comment.rating"
-          :message="comment.message"
-          :timestamp="comment.timestamp">
-        </comment>
-        <hr>
-      </template>
+      <comment
+        v-for="comment in comments"
+        :key="comment._id"
+        :rating="comment.rating"
+        :message="comment.message"
+        :timestamp="comment.timestamp">
+      </comment>
     </div>
   </section>
 </template>
