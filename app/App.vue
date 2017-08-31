@@ -1,10 +1,11 @@
 <template>
   <main id="app">
     <main-header></main-header>
+		<review-section></review-section>
   </main>
 </template>
 
-<style>
+<style scoped>
   #app {
     display: flex;
     flex-direction: column;
@@ -15,10 +16,12 @@
 
 <script>
   import MainHeader from './layouts/MainHeader.vue'
+import ReviewSection from './layouts/ReviewSection.vue'
 
   export default {
     components: {
-      MainHeader
+      MainHeader,
+      ReviewSection
     }
   }
 </script>

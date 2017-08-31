@@ -1,19 +1,15 @@
 <template>
-	<header class="main-header">
+	<tap-section class="main-header" centered>
 		<icon icon="information-outline"></icon>
-	</header>
+	</tap-section>
 </template>
 
-<style>
+<style scoped>
 	@import "@css/variables";
 	.main-header {
-		display: flex;
-		align-items: center;
-		padding-left: 10%;
-	  background-color: var(--header-color);
-	  width: 90%;
+	  background-color: var(--header-background);
 	  height: 20vh;
-	  font-family: var(--font);
+		font-family: var(--font);
 	  font-size: 5rem;
 		color: #fff;
 	}
@@ -21,10 +17,12 @@
 
 <script>
 	import Icon from '../components/Icon.vue'
+	import TapSection from '../components/TapSection.vue'
 
 	export default {
 	  components: {
-	    Icon
+	    Icon,
+	    TapSection
 	  }
 	}
 </script>

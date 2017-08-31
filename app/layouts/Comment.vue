@@ -1,9 +1,7 @@
 <template>
-
 </template>
 
-<style scoped>
-  @import "@css/variables";
+<style>
 </style>
 
 <script>

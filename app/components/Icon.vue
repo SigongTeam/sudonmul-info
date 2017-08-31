@@ -2,7 +2,7 @@
   <i :class="`mdi mdi-${icon}`"></i>
 </template>
 
-<style>
+<style scoped>
   @import "mdi/css/materialdesignicons.min.css";
 </style>
 
