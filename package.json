@@ -6,11 +6,12 @@
   "scripts": {
     "lint": "eslint --fix . --ext .js,.vue",
     "compile": "webpack --progress --hide-modules",
-    "test": "npm run lint && npm run compile",
     "backend": "node .",
     "frontend": "webpack-dev-server --hot",
-    "dev": "npm run lint && npm run frontend",
-    "start": "npm run test && npm run backend"
+
+    "test": "npm run lint && npm run compile",
+    "dev": "npm run lint && concurrently \"npm run frontend\" \"npm run backend\"",
+    "start": "npm test && npm run backend"
   },
   "repository": {
     "type": "git",
@@ -61,10 +62,13 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "boom": "^5.2.0",
+    "concurrently": "^3.5.0",
     "dotenv": "^4.0.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-chalk-logger": "^1.0.0",
+    "koa-compose": "^4.0.0",
     "koa-conditional-get": "^2.0.0",
     "koa-etag": "^3.0.0",
     "koa-router": "^7.2.1",
