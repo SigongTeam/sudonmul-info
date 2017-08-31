@@ -1,10 +1,108 @@
 <template>
-  <section class="comment-view"></section>
+  <section class="comment-view">
+    <div class="graphs">
+      <div class="progress-container">
+        <div class="graph" ref="frown">
+          <div class="text">:(</div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="graph" ref="norm">
+          <div class="text">:|</div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="graph" ref="smile">
+          <div class="text">:)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="comment-list">
+      <comment
+        v-for="comment in comments"
+        :key="comment._id"
+        :rating="comment.rating"
+        :message="comment.message"
+        :timestamp="comment.timestamp">
+      </comment>
+    </div>
+  </section>
 </template>
 
 <style>
   @import "@vars";
+
+  .graphs {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .comment-list {
+    background: #fff;
+  }
+
+  hr {
+    margin: 0 .1rem;
+  }
+
+  .progress-container .graph {
+    flex: 1;
+    padding: 20px;
+    position: relative;
+
+    & .text {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 7rem;
+      font-weight: 600;
+    }
+  }
 </style>
 
 <script>
+import Comment from './Comment.vue'
+import ProgressBar from 'progressbar.js'
+
+const emojiNames = ['frown', 'norm', 'smile']
+const options = {
+  color: '#2f493e',
+  strokeWidth: 4,
+  trailWidth: 1,
+  duration: 1400,
+  easing: 'easeInOut',
+  text: { autoStyleContainer: false }
+}
+
+export default {
+  props: {
+    comments: {
+      type: Array,
+      required: true
+    }
+  },
+
+  data: () => ({ bars: [] }),
+
+  components: {
+    Comment
+  },
+
+  mounted () {
+    emojiNames.forEach((emoji, rating) =>
+      (this.bars[rating] = new ProgressBar.Circle(this.$refs[emoji], options)))
+  },
+
+  updated () {
+    this.bars.forEach((bar, rating) => {
+      const sameRatings = this.comments.filter(c => c.rating === rating)
+      bar.animate(sameRatings.length / this.comments.length)
+    })
+  }
+}
 </script>

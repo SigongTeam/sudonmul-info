@@ -1,7 +1,7 @@
 <template>
   <tap-section class="review-section">
-    <h1>리뷰</h1>
-    <comment-view></comment-view>
+    <h2>리뷰</h2>
+    <comment-view :comments="dummy"></comment-view>
   </tap-section>
 </template>
 
@@ -9,6 +9,10 @@
   @import "@vars";
   .review-section {
     background: var(--review-background);
+
+    & h2 {
+      font-weight: 600;
+    }
   }
 </style>
 
@@ -20,6 +24,15 @@ export default {
   components: {
     CommentView,
     TapSection
+  },
+
+  data: () => ({ dummy: [] }),
+
+  created () {
+    fetch('/review')
+      .then(res => res.json())
+      .then(json => (this.dummy = json))
+      .catch(err => alert(err))
   }
 }
 </script>
