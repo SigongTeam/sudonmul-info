@@ -7,12 +7,12 @@
 </style>
 
 <script>
-  export default {
-    props: {
-      icon: {
-        type: String,
-        required: true
-      }
+export default {
+  props: {
+    icon: {
+      type: String,
+      required: true
     }
   }
+}
 </script>

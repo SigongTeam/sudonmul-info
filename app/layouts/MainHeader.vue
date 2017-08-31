@@ -20,11 +20,11 @@
 </style>
 
 <script>
-	import Icon from '../components/Icon.vue'
+import Icon from '../components/Icon.vue'
 
-	export default {
+export default {
 	  components: {
 	    Icon
 	  }
-	}
+}
 </script>

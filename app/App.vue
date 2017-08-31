@@ -17,11 +17,11 @@
 </style>
 
 <script>
-  import MainHeader from './layouts/MainHeader.vue'
+import MainHeader from './layouts/MainHeader.vue'
 
-  export default {
-    components: {
-      MainHeader
-    }
+export default {
+  components: {
+    MainHeader
   }
+}
 </script>
