@@ -78,8 +78,8 @@ export default {
   },
 
   mounted () {
-    this.ratingMap.forEach((v, i) => {
-      const bar = new ProgressBar.Circle(this.$refs[v], {
+    this.ratingMap.forEach((emoji, rating) => {
+      const bar = new ProgressBar.Circle(this.$refs[emoji], {
         color: '#2f493e',
         strokeWidth: 4,
         trailWidth: 1,
@@ -89,7 +89,9 @@ export default {
           autoStyleContainer: false
         }
       })
-      bar.animate(this.comments.filter((v) => v.rating === i).length / this.comments.length)
+
+      const sameRatings = this.comments.filter(c => c.rating === rating)
+      bar.animate(sameRatings.length / this.comments.length)
     })
   }
 }
