@@ -59,6 +59,16 @@
 import Comment from './Comment.vue'
 import ProgressBar from 'progressbar.js'
 
+const emojiNames = ['frown', 'norm', 'smile']
+const options = {
+  color: '#2f493e',
+  strokeWidth: 4,
+  trailWidth: 1,
+  easing: 'easeInOut',
+  duration: 1400,
+  text: { autoStyleContainer: false }
+}
+
 export default {
   props: {
     comments: {
@@ -67,29 +77,19 @@ export default {
     }
   },
 
+  data: () => ({ bars: [] }),
+
   components: {
     Comment
   },
 
-  computed: {
-    ratingMap () {
-      return ['frown', 'norm', 'smile']
-    }
+  mounted () {
+    emojiNames.forEach((emoji, rating) =>
+      (this.bars[rating] = new ProgressBar.Circle(this.$refs[emoji], options)))
   },
 
-  mounted () {
-    this.ratingMap.forEach((emoji, rating) => {
-      const bar = new ProgressBar.Circle(this.$refs[emoji], {
-        color: '#2f493e',
-        strokeWidth: 4,
-        trailWidth: 1,
-        easing: 'easeInOut',
-        duration: 1400,
-        text: {
-          autoStyleContainer: false
-        }
-      })
-
+  updated () {
+    this.bars.forEach((bar, rating) => {
       const sameRatings = this.comments.filter(c => c.rating === rating)
       bar.animate(sameRatings.length / this.comments.length)
     })
