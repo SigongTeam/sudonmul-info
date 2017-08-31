@@ -5,5 +5,8 @@
     "browser": true
   },
   "extends": ["standard"],
-  "plugins": ["html", "vue"]
+  "plugins": ["html", "vue"],
+  "rules": {
+    "no-new": "off"
+  }
 }
