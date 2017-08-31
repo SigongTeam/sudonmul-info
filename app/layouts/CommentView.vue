@@ -2,21 +2,18 @@
   <section class="comment-view">
     <div class="graphs">
       <div class="progress-container">
-        <div class="graph" ref="frown">
-          <div class="text">:(</div>
-        </div>
+        <div class="text">:(</div>
+        <div class="graph" ref="frown"></div>
       </div>
 
       <div class="progress-container">
-        <div class="graph" ref="norm">
-          <div class="text">:|</div>
-        </div>
+        <div class="text">:|</div>
+        <div class="graph" ref="norm"></div>
       </div>
 
       <div class="progress-container">
-        <div class="graph" ref="smile">
-          <div class="text">:)</div>
-        </div>
+        <div class="text">:)</div>
+        <div class="graph" ref="smile"></div>
       </div>
     </div>
 
@@ -37,7 +34,8 @@
 
   .graphs {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 20px;
   }
 
   .comment-list {
@@ -48,36 +46,31 @@
     margin: 0 .1rem;
   }
 
-  .progress-container .graph {
-    flex: 1;
-    padding: 20px;
+  .progress-container {
     position: relative;
+    display: flex;
+    align-items: center;
 
     & .text {
-      display: inline-block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 7rem;
+      font-size: 3rem;
       font-weight: 600;
+      width: 30px;
+    }
+
+    & .graph {
+      background: #2f493e;
+      margin-left: 20px;
+      height: 20px;
+      width: 0;
+      transition: width 2s ease;
     }
   }
 </style>
 
 <script>
 import Comment from './Comment.vue'
-import ProgressBar from 'progressbar.js'
 
 const emojiNames = ['frown', 'norm', 'smile']
-const options = {
-  color: '#2f493e',
-  strokeWidth: 4,
-  trailWidth: 1,
-  duration: 1400,
-  easing: 'easeInOut',
-  text: { autoStyleContainer: false }
-}
 
 export default {
   props: {
@@ -93,15 +86,11 @@ export default {
     Comment
   },
 
-  mounted () {
-    emojiNames.forEach((emoji, rating) =>
-      (this.bars[rating] = new ProgressBar.Circle(this.$refs[emoji], options)))
-  },
-
   updated () {
-    this.bars.forEach((bar, rating) => {
+    emojiNames.forEach((emoji, rating) => {
       const sameRatings = this.comments.filter(c => c.rating === rating)
-      bar.animate(sameRatings.length / this.comments.length)
+      const percentage = (sameRatings.length / this.comments.length) * 100
+      this.$refs[emoji].style.width = `${percentage}%`
     })
   }
 }

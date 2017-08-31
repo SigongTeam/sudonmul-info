@@ -19,7 +19,8 @@ const plugins = [
   new ExtractTextPlugin('bundle.css'),
   new HtmlPlugin({ template: 'app/app.html' }),
   new webpack.LoaderOptionsPlugin({ minimize: true }),
-  new webpack.optimize.UglifyJsPlugin(uglifyOptions)
+  new webpack.optimize.UglifyJsPlugin(uglifyOptions),
+  new webpack.IgnorePlugin(/^\.\/locale/, /moment$/)
 ]
 
 const postcssLoader = {
