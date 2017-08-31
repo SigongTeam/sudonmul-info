@@ -27,18 +27,14 @@ export default {
     TapSection
   },
 
-  computed: {
-    dummy() {
-      return [
-        {rating: 2, text: "Hello, World!"},
-        {rating: 2, text: "Hello, World!"},
-        {rating: 2, text: "Hello, World!"},
-        {rating: 2, text: "Hello, World!"},
-        {rating: 1, text: "Hello, World!"},
-        {rating: 0, text: "Hello, World!"},
-        {rating: 0, text: "Hello, World!"}
-      ]
-    }
+  data: () => ({ dummy: [] }),
+
+  created () {
+    alert('wowowow')
+    fetch('/review')
+      .then(res => res.json())
+      .then(json => (this.dummy = json.slice(0, 15)))
+      .catch(err => alert(err))
   }
 }
 </script>

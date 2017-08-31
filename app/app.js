@@ -1,3 +1,4 @@
+import 'whatwg-fetch'
 import 'babel-polyfill'
 
 import Vue from 'vue'

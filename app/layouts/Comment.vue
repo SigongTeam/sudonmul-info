@@ -4,8 +4,8 @@
       {{emoji}}
     </div>
 
-    <div class="text">
-      {{text}}
+    <div class="message">
+      {{message}}
     </div>
   </div>
 </template>
@@ -24,30 +24,30 @@
       padding: 10px;
     }
 
-    & .text {
+    & .message {
       font-size: 1.2rem;
     }
   }
 </style>
 
 <script>
-  export default {
-    props: {
-      rating: {
-        type: Number,
-        required: true
-      },
-
-      text: {
-        type: String,
-        required: true
-      }
+export default {
+  props: {
+    rating: {
+      type: Number,
+      required: true
     },
 
-    computed: {
-      emoji() {
-        return [':(', ':|', ':)'][this.rating];
-      }
+    message: {
+      type: String,
+      required: true
+    }
+  },
+
+  computed: {
+    emoji () {
+      return [':(', ':|', ':)'][this.rating]
     }
   }
+}
 </script>

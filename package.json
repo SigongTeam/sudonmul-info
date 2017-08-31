@@ -8,7 +8,6 @@
     "compile": "webpack --progress --hide-modules",
     "backend": "node .",
     "frontend": "webpack-dev-server --hot",
-
     "test": "npm run lint && npm run compile",
     "dev": "npm run lint && concurrently \"npm run frontend\" \"npm run backend\"",
     "start": "npm test && npm run backend"
