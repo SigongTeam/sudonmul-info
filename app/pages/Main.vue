@@ -3,7 +3,7 @@
 </template>
 
 <style>
-  @import "~variables";
+  @import "@css/variables";
 </style>
 
 <script>

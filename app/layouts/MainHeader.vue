@@ -5,7 +5,7 @@
 </template>
 
 <style>
-  @import "variables";
+  @import "@css/variables";
 
   .main-header {
     background-color: var(--header-color);
