@@ -29,13 +29,13 @@ module.exports = class Geocoder {
   }
 
   /**
-   * @param {Array} cord dCode
+   * @param {Array} dCode
    */
-  async getJusoByD (cord) {
+  async getJusoByD (dCode) {
     const r = await rp({
       uri: ENDPOINT_URI,
       qs: {
-        latlng: cord,
+        latlng: dCode,
         key: this.key
       }
     })
