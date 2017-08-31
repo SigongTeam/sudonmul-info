@@ -42,4 +42,5 @@ function startApp () {
 
 connectDatabase()
   .then(startApp)
-  .then(require('./dummy'))
+  .then(require('./dummy/review/index'))
+  .then(require('./dummy/facility/index'))
