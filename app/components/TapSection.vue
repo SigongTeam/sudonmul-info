@@ -7,8 +7,10 @@
 </template>
 
 <style scoped>
+  @import "@vars";
+
   .section-wrapper {
-    max-width: 768px;
+    max-width: var(--section-width);
     width: 100%;
     height: 100%;
     margin: 0 auto;
