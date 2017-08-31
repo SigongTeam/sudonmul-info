@@ -4,6 +4,7 @@ Gives information about tap water.
 ## Requirements
 - Node.js v8.2.1
 - MongoDB v3.4.6
+- OpenSSL v1.0.2
 
 ## Usage
 ```bash
@@ -11,7 +12,7 @@ Gives information about tap water.
 $ npm install
 
 # create .env file
-echo 'MONGODB_URI=mongodb://hello.world:1234/wow' > .env
+$ echo 'MONGODB_URI=mongodb://hello.world:1234/wow' > .env
 
 # create self-signed certificate
 $ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
