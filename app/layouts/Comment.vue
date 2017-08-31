@@ -1,4 +1,5 @@
 <template>
+  <div class="comment"></div>
 </template>
 
 <style>

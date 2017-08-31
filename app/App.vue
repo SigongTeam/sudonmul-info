@@ -17,13 +17,13 @@
 </style>
 
 <script>
-  import MainHeader from './layouts/MainHeader.vue'
-  import ReviewSection from './layouts/ReviewSection.vue'
+import MainHeader from './layouts/MainHeader.vue'
+import ReviewSection from './layouts/ReviewSection.vue'
 
-  export default {
-    components: {
-      MainHeader,
-      ReviewSection
-    }
+export default {
+  components: {
+    MainHeader,
+    ReviewSection
   }
+}
 </script>
