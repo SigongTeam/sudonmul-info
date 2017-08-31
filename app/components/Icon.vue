@@ -2,6 +2,10 @@
   <i :class="`mdi mdi-${icon}`"></i>
 </template>
 
+<style>
+  @import "mdi/css/materialdesignicons.min.css";
+</style>
+
 <script>
   export default {
     props: {
