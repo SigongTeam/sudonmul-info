@@ -4,7 +4,8 @@
   "description": "Gives information about tap water.",
   "main": "src/index.js",
   "scripts": {
-    "lint": "eslint --fix . --ext .js,.vue",
+    "lint": "eslint . --ext .js,.vue",
+    "fix": "npm run lint -- --fix",
     "compile": "webpack --progress --hide-modules",
     "backend": "node .",
     "frontend": "webpack-dev-server --hot",
