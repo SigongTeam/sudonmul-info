@@ -3,22 +3,21 @@ jobs:
   build:
     working_directory: ~/sudonmul
     docker:
-      - image: circleci/node:8.4.0
-      - image: mongo:3.5.12
+      - image: node:8.2.1
     steps:
       - checkout
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
-          key: dep-cache-{{ checksum "package.json" }}
+          key: dep-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run:
-          name: install-npm
+          name: Install dependencies
           command: npm install
-      - save_cache:
-          key: dep-cache-{{ checksum "package.json" }}
-          paths:
-            - node_modules
       - run:
-          name: test
+          name: Build and test
           command: npm test
+      - save_cache:
+          key: dep-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
