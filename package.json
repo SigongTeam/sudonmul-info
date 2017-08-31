@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/SigongTeam/sudonmul-info#readme",
   "devDependencies": {
+    "autoprefixer": "^7.1.3",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.2",

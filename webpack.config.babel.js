@@ -22,10 +22,15 @@ const plugins = [
   new webpack.optimize.UglifyJsPlugin(uglifyOptions)
 ]
 
+const postcssLoader = {
+  loader: 'postcss-loader',
+  options: { sourceMap: 'inline' }
+}
+
 const loaders = {
   css: ExtractTextPlugin.extract({
-    use: 'css-loader',
-    fallback: 'vue-style-loader'
+    fallback: 'vue-style-loader',
+    use: ['css-loader', postcssLoader]
   })
 }
 
@@ -51,8 +56,8 @@ const rules = [
   {
     test: /\.css$/,
     use: ExtractTextPlugin.extract({
-      use: 'css-loader',
-      fallback: 'style-loader'
+      fallback: 'style-loader',
+      use: ['css-loader', postcssLoader]
     })
   }
 ]
@@ -61,7 +66,7 @@ const performance = { hints: false }
 
 const alias = {
   vue$: 'vue/dist/vue.common.js',
-  variable: '/app/css/variables.css'
+  variable: 'app/css/variables.css'
 }
 
 const devtool = '#eval-source-map'
