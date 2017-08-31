@@ -1,19 +1,24 @@
 <template>
-  <div id="app">
-    <h1>Hello, world!</h1>
-  </div>
+	<main id="app">
+		<main-header></main-header>
+	</main>
 </template>
 
-<script>
-  export default {
-    created () {
-      alert('wow')
-    }
-  }
-</script>
-
 <style>
-  #app {
-    background-color: red;
-  }
+	#app {
+		display: flex;
+		flex-direction: column;
+		width: 100vw;
+		height: 100vh;
+	}
 </style>
+
+<script>
+	import MainHeader from "./layouts/MainHeader.vue";
+
+	export default {
+		components: {
+			MainHeader
+		}
+	};
+</script>

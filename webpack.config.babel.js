@@ -60,7 +60,8 @@ const rules = [
 const performance = { hints: false }
 
 const alias = {
-  vue$: 'vue/dist/vue.common.js'
+  vue$: 'vue/dist/vue.common.js',
+  variable: '/app/css/variables.css'
 }
 
 const devtool = '#eval-source-map'
