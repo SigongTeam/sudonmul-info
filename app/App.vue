@@ -1,10 +1,13 @@
 <template>
-  <main id="app">
+  <v-app id="app">
     <main-header></main-header>
-  </main>
+    <v-btn dark primary>Button!</v-btn>
+  </v-app>
 </template>
 
 <style>
+  @import "vuetify/dist/vuetify.min.css";
+
   #app {
     display: flex;
     flex-direction: column;
