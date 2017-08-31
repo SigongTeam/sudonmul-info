@@ -9,8 +9,9 @@ module.exports = class Geocoder {
 
   /**
    * @param {String} juso 도로명 주소
+   * @return {Array} dcode
    */
-  async fetchGeocode (juso) {
+  async getDByJuso (juso) {
     const r = await rp({
       uri: ENDPOINT_URI,
       qs: {
@@ -20,18 +21,34 @@ module.exports = class Geocoder {
     })
 
     const body = JSON.parse(r)
+    this._verifyError(body)
 
-    if (!body || !body.results || !body.status) {
-      throw new Error('Unexpected response data from geocode')
-    }
+    const result = body.results[0]
+    const {lat, lng} = result.geometry.location
+    return [lat, lng]
+  }
 
-    if (body.status === 'OK') {
-      const result = body.results[0]
-      const {lat, lng} = result.geometry.location
+  /**
+   * @param {Array} cord dCode
+   */
+  async getJusoByD (cord) {
+    const r = await rp({
+      uri: ENDPOINT_URI,
+      qs: {
+        latlng: cord,
+        key: this.key
+      }
+    })
 
-      return {lat, lng}
-    }
+    const body = JSON.parse(r)
+    this._verifyError(body)
 
-    throw new Error(`Unexpected response code "${body.status}"`)
+    const result = body.results[0]
+    return result['formatted_address']
+  }
+
+  _verifyError (body) {
+    if (!body || !body.results || !body.status) throw new Error('Unexpected response data from geocode')
+    if (body.status !== 'OK') throw new Error(`Unexpected response code "${body.status}"`)
   }
 }
