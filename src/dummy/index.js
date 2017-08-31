@@ -1,4 +1,4 @@
-const count = 30
+const count = 2
 const Review = require('../models/Review')
 
 const ips = require('./ips')
