@@ -10,12 +10,16 @@ const output = {
   path: path.resolve(__dirname, 'dist')
 }
 
+const uglifyOptions = {
+  sourceMap: true,
+  compress: { warnings: false }
+}
+
 const plugins = [
   new ExtractTextPlugin('bundle.css'),
   new HtmlPlugin({ template: 'app/app.html' }),
-
   new webpack.LoaderOptionsPlugin({ minimize: true }),
-  new webpack.optimize.UglifyJsPlugin({ sourceMap: true, compress: { warnings: false } })
+  new webpack.optimize.UglifyJsPlugin(uglifyOptions)
 ]
 
 const loaders = {
@@ -53,9 +57,13 @@ const rules = [
   }
 ]
 
+const performance = { hints: false }
+
 const alias = {
   vue$: 'vue/dist/vue.common.js'
 }
+
+const devtool = '#eval-source-map'
 
 const devServer = {
   hot: true,
@@ -64,14 +72,16 @@ const devServer = {
   historyApiFallback: true
 }
 
-module.exports = {
+export default {
   entry,
   output,
 
   plugins,
   module: { rules },
+
+  performance,
   resolve: { alias },
 
-  devServer,
-  devtool: '#eval-source-map'
+  devtool,
+  devServer
 }
