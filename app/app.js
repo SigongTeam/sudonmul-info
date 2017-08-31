@@ -9,6 +9,7 @@ import App from './App.vue'
 Vue.use(Vuex)
 Vue.use(Vuetify)
 
+// eslint-disable-next-line no-new
 new Vue({
   el: '#app',
   render: h => h(App)
