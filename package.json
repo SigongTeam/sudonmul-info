@@ -9,9 +9,9 @@
     "test": "npm run lint && npm run compile",
 
     "backend": "node .",
-    "frontend": "webpack-dev-server . --hot",
+    "frontend": "webpack-dev-server --hot",
 
-    "dev": "npm run test && npm run frontend",
+    "dev": "npm run lint && npm run frontend",
     "start": "npm run test && npm run backend"
   },
   "repository": {
