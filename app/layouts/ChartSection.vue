@@ -108,8 +108,8 @@ export default {
       ph: [
         {
           label: 'pH 산도',
-          backgroundColor: '#00adb5',
-          borderColor: '#00adb5',
+          backgroundColor: '#ffc107',
+          borderColor: '#ffc107',
           data: qualities.map((v) => v.phVal),
           fill: false
         },
@@ -132,8 +132,8 @@ export default {
       cl: [
         {
           label: '잔류 염소 농도 (mg/L)',
-          backgroundColor: '#00adb5',
-          borderColor: '#00adb5',
+          backgroundColor: '#ff5722',
+          borderColor: '#ff5722',
           data: qualities.map((v) => v.clVal),
           fill: false
         },
