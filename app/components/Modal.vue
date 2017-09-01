@@ -3,7 +3,6 @@
     <div v-if="opened">
       <div class="backdrop" @click="backdropClose"></div>
       <section class="modal-view">
-        <a @click="closeModal" class="modal-closer" v-if="backdropClosable">&times;</a>
         <slot></slot>
       </section>
     </div>
@@ -12,23 +11,23 @@
 
 <style scoped>
   .backdrop {
-     background: rgba(0, 0, 0, 0.6);
-     position: fixed;
-     left: 0;
-     top: 0;
-     width: 100vw;
-     height: 100vh;
-     z-index: 99;
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99;
   }
 
   .modal-view {
-     position: fixed;
-     left: 30vw;
-     top: 30vh;
-     width: 40vw;
-     height: 40vh;
-     background: #fff;
-     z-index: 100;
+    position: fixed;
+    left: 30vw;
+    top: 30vh;
+    width: 40vw;
+    height: 40vh;
+    background: #fff;
+    z-index: 100;
   }
 
   .modal-closer {
