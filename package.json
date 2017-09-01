@@ -11,7 +11,7 @@
     "frontend": "webpack-dev-server --hot --https --cert ./cert.pem --key ./key.pem",
     "test": "npm run lint && npm run compile",
     "dev": "npm run lint && concurrently \"npm run frontend\" \"npm run backend\"",
-    "start": "npm test && npm run backend"
+    "start": "npm test && node ."
   },
   "repository": {
     "type": "git",
