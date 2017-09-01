@@ -6,10 +6,10 @@
       <tap-button @click="open(1)" class="norm">:|</tap-button>
       <tap-button @click="open(0)" class="frown">:(</tap-button>
     </div>
-    <modal :opened="openStatus" :backdropClosable="true" @close="close" class="modal">
+    <modal :opened="opened" :backdropClosable="true" @close="close" class="modal">
       <div class="modal-inner">
         <textarea placeholder="자세한 리뷰를 남겨주세요! (선택사항)" v-model="comment"></textarea>
-        <button class="send" @click="send(opened)">
+        <button class="send" @click="send(context)">
           <icon icon="send"></icon>
         </button>
       </div>
@@ -73,7 +73,7 @@ import TapButton from '../components/TapButton.vue'
 import TapSection from '../components/TapSection.vue'
 
 export default {
-  data: () => ({opened: false, supportsWriting: true, finished: false, comment: ''}),
+  data: () => ({opened: false, context: -1, supportsWriting: true, finished: false, comment: ''}),
 
   components: {
     Icon,
@@ -85,7 +85,8 @@ export default {
   methods: {
     open (name) {
       if (this.supportsWriting) {
-        this.opened = name
+        this.opened = true
+        this.context = name
       } else {
         this.send(name)
       }
@@ -111,12 +112,6 @@ export default {
       if (this.supportsWriting) {
         this.finished = true
       }
-    }
-  },
-
-  computed: {
-    openStatus () {
-      return !!this.opened
     }
   }
 }

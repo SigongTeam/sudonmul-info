@@ -1,6 +1,7 @@
 <template>
   <tap-section class="chart-section">
     <h1>정수장 수질 정보</h1>
+    <h3>{{name}}</h3>
     <canvas ref="canvas"></canvas>
   </tap-section>
 </template>
@@ -9,11 +10,13 @@
   .chart-section {
     background: #eeeeee;
 
+    & h1 {
+      font-weight: 600;
+    }
+    
     & canvas {
-      width: calc(100vw - 40px);
-      max-width: 400px;
-      height: calc(100vw - 40px);
-      max-height: 400px;
+      width: 100%;
+      margin: 0 auto;
     }
   }
 </style>
@@ -83,16 +86,19 @@ const config = {
 }
 
 export default {
+  data: () => ({name: 'Loading..'}),
   async mounted () {
     const location = await Geolocation.getParsedPosition()
 
-    const res = await axios('/facility', {
-      data: {
-        location
-      }
+    const res = await axios.post('/facility', {
+      location: [location.latitude, location.longitude]
     })
 
-    res.data.forEach((v) => ['tbVal', 'clVal', 'phVal'].forEach((k, i) => config.data.datasets[i].data.push(v[k])))
+    res.data.qualities.forEach((v) => ['tbVal', 'clVal', 'phVal'].forEach((k, i) => {
+      config.data.datasets[i].data.push(v[k])
+    }))
+
+    this.name = res.data.name
     this.chart = new Chart(this.$refs.canvas.getContext('2d'), config)
   },
 

@@ -3,9 +3,6 @@ const Facility = require('../models/Facility')
 
 module.exports = new Router({ prefix: '/facility' })
   .post('/', async ctx => {
-    // TODO body->location = Geolocation::getParsedPosition
-    // TODO return->[{tbVal, clVal, phVal}][30]
-
     const data = ctx.request.body
     if (!data.location) {
       // TODO Bad request
@@ -19,12 +16,8 @@ module.exports = new Router({ prefix: '/facility' })
       limit: 1
     }))
 
-    const obj = []
-    results.forEach(v => {
-      //console.log('v', v.obj)
-      //console.log('v.getOwnProperties()', Object.getOwnPropertyNames(v.obj))
-      obj.push(v.obj.qualities) // FIXME
-    })
-
-    ctx.body = obj
+    ctx.body = {
+      qualities: results[0].obj.qualities,
+      name: results[0].obj.name
+    }
   })

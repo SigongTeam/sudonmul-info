@@ -4,6 +4,7 @@
     <location-section></location-section>
     <write-section @write="write"></write-section>
     <info-section :opened="infoOpened"></info-section>
+    <chart-section></chart-section>
     <review-section ref="review"></review-section>
   </main>
 </template>
@@ -22,10 +23,12 @@ import MainHeader from './layouts/MainHeader.vue'
 import ReviewSection from './layouts/ReviewSection.vue'
 import WriteSection from './layouts/WriteSection.vue'
 import InfoSection from './layouts/InfoSection.vue'
+import ChartSection from './layouts/ChartSection.vue'
 
 export default {
   data: () => ({ infoOpened: false }),
   components: {
+    ChartSection,
     LocationSection,
     MainHeader,
     ReviewSection,
@@ -36,6 +39,7 @@ export default {
   methods: {
     write () {
       this.$refs.review.refresh()
+      localStorage.setItem('amount', parseInt(localStorage.getItem('amount') || 0) + 1)
       this.infoOpened = true
     }
   }
