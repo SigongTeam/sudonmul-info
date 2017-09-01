@@ -1,6 +1,6 @@
 const compose = require('koa-compose')
 
-const routeNames = ['review', 'where']
+const routeNames = ['review', 'where', 'facility']
 const routes = routeNames
   .map(n => require(`./${n}`))
   .map(r => [r.routes(), r.allowedMethods()])

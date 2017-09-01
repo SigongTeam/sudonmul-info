@@ -64,6 +64,7 @@
     "axios": "^0.16.2",
     "babel-polyfill": "^6.26.0",
     "boom": "^5.2.0",
+    "chart.js": "^2.6.0",
     "concurrently": "^3.5.0",
     "dotenv": "^4.0.0",
     "k-live-water": "^1.0.3",
