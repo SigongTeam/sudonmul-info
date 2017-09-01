@@ -1,11 +1,14 @@
 <template>
-  <tap-section>
+  <tap-section class="chart-section">
     <h1>정수장 수질 정보</h1>
     <canvas ref="canvas"></canvas>
   </tap-section>
 </template>
 
 <style scoped>
+  .chart-section {
+    background: #eeeeee;
+  }
 </style>
 
 <script>

@@ -2,8 +2,8 @@
   <main id="app">
     <main-header></main-header>
     <location-section></location-section>
-    <write-section></write-section>
-    <review-section></review-section>
+    <write-section @write="refresh"></write-section>
+    <review-section ref="review"></review-section>
   </main>
 </template>
 
@@ -27,6 +27,12 @@ export default {
     MainHeader,
     ReviewSection,
     WriteSection
+  },
+
+  methods: {
+    refresh () {
+      this.$refs.review.refresh()
+    }
   }
 }
 </script>

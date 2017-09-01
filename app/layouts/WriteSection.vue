@@ -106,6 +106,7 @@ export default {
 
       await axios.post('/review', data)
 
+      this.$emit('write')
       this.close()
       if (this.supportsWriting) {
         this.finished = true

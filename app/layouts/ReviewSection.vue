@@ -32,16 +32,22 @@ export default {
   data: () => ({ reviews: [] }),
 
   async created () {
-    const location = await Geolocation.getParsedPosition()
+    await this.refresh()
+  },
 
-    axios
-      .get('/review', {
-        params: {
-          location
-        }
-      })
-      .then(res => (this.reviews = res.data))
-      .catch(err => alert(err))
+  methods: {
+    async refresh () {
+      const location = await Geolocation.getParsedPosition()
+
+      axios
+        .get('/review', {
+          params: {
+            location
+          }
+        })
+        .then(res => (this.reviews = res.data))
+        .catch(err => alert(err))
+    }
   }
 }
 </script>
