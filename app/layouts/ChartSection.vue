@@ -13,7 +13,7 @@
     & h1 {
       font-weight: 600;
     }
-    
+
     & canvas {
       width: 100%;
       margin: 0 auto;
@@ -94,7 +94,7 @@ export default {
       location: [location.latitude, location.longitude]
     })
 
-    res.data.qualities.forEach((v) => ['tbVal', 'clVal', 'phVal'].forEach((k, i) => {
+    res.data.qualities.forEach((v) => ['tbVal', 'phVal', 'clVal'].forEach((k, i) => {
       config.data.datasets[i].data.push(v[k])
     }))
 
