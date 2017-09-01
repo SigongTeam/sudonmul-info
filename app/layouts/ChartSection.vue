@@ -98,8 +98,8 @@ export default {
 
         {
           label: '최대 기준치',
-          backgroundColor: 'rgba(255, 0, 0, .3)',
-          borderColor: '#ff5722',
+          backgroundColor: 'rgba(128, 128, 128, .2)',
+          borderColor: '#999',
           data: [...Array(15)].map((v) => 1),
           fill: 'origin'
         }
@@ -115,15 +115,15 @@ export default {
         },
         {
           label: '최대 기준치',
-          backgroundColor: 'rgba(255, 0, 0, .3)',
-          borderColor: '#ff5722',
+          backgroundColor: 'rgba(128, 128, 128, .2)',
+          borderColor: '#999',
           data: [...Array(15)].map((v) => 8.5),
           fill: 2
         },
         {
           label: '최소 기준치',
-          backgroundColor: 'rgba(255, 0, 0, .3)',
-          borderColor: '#ff5722',
+          backgroundColor: 'rgba(128, 128, 128, .2)',
+          borderColor: '#999',
           data: [...Array(15)].map((v) => 5.8),
           fill: false
         }
@@ -139,8 +139,8 @@ export default {
         },
         {
           label: '최대 기준치',
-          backgroundColor: 'rgba(255, 0, 0, .3)',
-          borderColor: '#ff5722',
+          backgroundColor: 'rgba(128, 128, 128, .2)',
+          borderColor: '#999',
           data: [...Array(15)].map((v) => 2),
           fill: 'origin'
         }
