@@ -4,10 +4,11 @@
   "description": "Gives information about tap water.",
   "main": "src/index.js",
   "scripts": {
-    "lint": "eslint --fix . --ext .js,.vue",
+    "lint": "eslint . --ext .js,.vue",
+    "fix": "npm run lint -- --fix",
     "compile": "webpack --progress --hide-modules",
     "backend": "node .",
-    "frontend": "webpack-dev-server --hot",
+    "frontend": "webpack-dev-server --hot --https --cert ./cert.pem --key ./key.pem",
     "test": "npm run lint && npm run compile",
     "dev": "npm run lint && concurrently \"npm run frontend\" \"npm run backend\"",
     "start": "npm test && npm run backend"
@@ -60,11 +61,15 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "babel-polyfill": "^6.26.0",
     "boom": "^5.2.0",
+    "chart.js": "^2.6.0",
+    "chrome-launcher": "^0.6.0",
+    "chrome-remote-interface": "^0.24.4",
     "concurrently": "^3.5.0",
     "dotenv": "^4.0.0",
-    "k-live-water": "^1.0.3",
+    "k-live-water": "^1.0.8",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-chalk-logger": "^1.0.0",
@@ -72,19 +77,15 @@
     "koa-conditional-get": "^2.0.0",
     "koa-etag": "^3.0.0",
     "koa-router": "^7.2.1",
+    "koa-sslify": "^2.1.2",
     "koa-static": "^4.0.1",
     "mdi": "^2.0.46",
     "moment": "^2.18.1",
     "mongoose": "^4.11.9",
-    "progressbar.js": "^1.0.1",
     "request": "^2.81.0",
-    "request-promise": "^4.2.1",
     "skeleton-css": "^2.0.4",
-    "time-ago": "^0.1.0",
+    "sweetalert": "^1.1.3",
     "typeface-spoqa-han-sans2": "^2.1.2",
-    "vue": "^2.4.2",
-    "vue-router": "^2.7.0",
-    "vuex": "^2.4.0",
-    "whatwg-fetch": "^2.0.3"
+    "vue": "^2.4.2"
   }
 }

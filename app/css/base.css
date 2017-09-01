@@ -5,7 +5,12 @@
 
 @import "typeface-spoqa-han-sans2";
 @import "mdi/css/materialdesignicons.min.css";
+@import "sweetalert/dist/sweetalert.css";
 
 html, body {
   font-family: var(--font);
+}
+
+.sa-confirm-button-container button {
+  height: inherit;
 }

@@ -1,7 +1,10 @@
 const mongoose = require('mongoose')
+const Location = require('./schema/Location')
 
 const schema = mongoose.Schema({
-  location: { type: String, index: true },
+  juso: { type: String, required: true },
+  location: { type: Location, required: true },
+
   rating: { type: Number, index: true },
   timestamp: { type: Date, index: true },
 

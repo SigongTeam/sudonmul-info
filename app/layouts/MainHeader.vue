@@ -1,16 +1,27 @@
 <template>
   <tap-section class="main-header" centered>
-    <icon icon="information-outline"></icon> 수돈물
+    <a class="header-link" href="/">
+      <img src="../img/logo.svg" alt="Logo">
+    </a>
   </tap-section>
 </template>
 
 <style scoped>
   @import "@vars";
+
   .main-header {
     background-color: var(--header-background);
-    height: 20vh;
-    font-size: 5rem;
+    height: 60px;
+    font-size: 4rem;
     color: #fff;
+
+    & .header-link {
+      display: flex;
+
+      & img {
+        height: 40px;
+      }
+    }
   }
 </style>
 

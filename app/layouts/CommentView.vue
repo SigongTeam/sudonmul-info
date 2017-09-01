@@ -1,22 +1,25 @@
 <template>
   <section class="comment-view">
-    <div class="graphs">
-      <div class="progress-container">
-        <div class="graph" ref="frown">
+    <div class="stat">
+      <div class="graphs">
+        <div class="progress-container">
           <div class="text">:(</div>
+          <div class="graph frown" ref="frown"></div>
         </div>
-      </div>
 
-      <div class="progress-container">
-        <div class="graph" ref="norm">
+        <div class="progress-container">
           <div class="text">:|</div>
+          <div class="graph norm" ref="norm"></div>
+        </div>
+
+        <div class="progress-container">
+          <div class="text">:)</div>
+          <div class="graph smile" ref="smile"></div>
         </div>
       </div>
-
-      <div class="progress-container">
-        <div class="graph" ref="smile">
-          <div class="text">:)</div>
-        </div>
+      <div class="stat-wrapper" v-if="indice">
+        <div class="stat-grade">{{indiceGrade}}</div>
+        <div class="stat-text">{{indiceText}}</div>
       </div>
     </div>
 
@@ -34,50 +37,74 @@
 
 <style>
   @import "@vars";
-
   .graphs {
     display: flex;
-    justify-content: space-between;
-  }
-
-  .comment-list {
-    background: #fff;
+    flex-direction: column;
+    margin-bottom: 20px;
+    flex: 1;
   }
 
   hr {
     margin: 0 .1rem;
   }
 
-  .progress-container .graph {
-    flex: 1;
-    padding: 20px;
+  .stat {
+    display: flex;
+    padding: 0 20px;
+  }
+
+  .stat-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-text {
+    font-size: 5rem;
+    font-weight: 600;
+  }
+
+  .stat-grade {
+    font-size: 1.7rem;
+  }
+
+  .progress-container {
     position: relative;
+    display: flex;
+    align-items: center;
 
     & .text {
-      display: inline-block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 7rem;
+      font-size: 3rem;
       font-weight: 600;
+      width: 30px;
+    }
+
+    & .graph {
+      background: #2f493e;
+      margin-left: 20px;
+      height: 20px;
+      width: 0;
+      transition: width 2s ease;
+
+      &.smile {
+        background: var(--smile-color);
+      }
+
+      &.norm {
+        background: var(--norm-color);
+      }
+
+      &.frown {
+        background: var(--frown-color);
+      }
     }
   }
 </style>
 
 <script>
 import Comment from './Comment.vue'
-import ProgressBar from 'progressbar.js'
 
 const emojiNames = ['frown', 'norm', 'smile']
-const options = {
-  color: '#2f493e',
-  strokeWidth: 4,
-  trailWidth: 1,
-  duration: 1400,
-  easing: 'easeInOut',
-  text: { autoStyleContainer: false }
-}
+const gradeNames = ['매우 좋지 않음', '좋지 않음', '약간 좋지 않음', '그럭저럭', '약간 좋음', '좋음', '매우 좋음']
 
 export default {
   props: {
@@ -87,21 +114,39 @@ export default {
     }
   },
 
+  components: { Comment },
   data: () => ({ bars: [] }),
 
-  components: {
-    Comment
+  methods: {
+    getRatings (rating) {
+      return this.comments.filter(c => c.rating === rating).length
+    }
   },
 
-  mounted () {
-    emojiNames.forEach((emoji, rating) =>
-      (this.bars[rating] = new ProgressBar.Circle(this.$refs[emoji], options)))
+  computed: {
+    indice () {
+      const indice = emojiNames
+        .map((_, rating) => rating * this.getRatings(rating))
+        .reduce((a, b) => a + b, 0)
+
+      return indice / (this.comments.length * 2)
+      // Rating = Coefficient, Indice -> Min: 0, Max: comments.length * 2
+    },
+
+    indiceText () {
+      return `${(100 * this.indice).toFixed(1)}%`
+    },
+
+    indiceGrade () {
+      const index = Math.floor(this.indice * gradeNames.length)
+      return gradeNames[Math.min(gradeNames.length - 1, index)]
+    }
   },
 
   updated () {
-    this.bars.forEach((bar, rating) => {
-      const sameRatings = this.comments.filter(c => c.rating === rating)
-      bar.animate(sameRatings.length / this.comments.length)
+    emojiNames.forEach((emoji, rating) => {
+      const percentage = this.getRatings(rating) / this.comments.length
+      this.$refs[emoji].style.width = `${percentage * 100}%`
     })
   }
 }

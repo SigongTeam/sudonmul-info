@@ -1,7 +1,7 @@
 <template>
   <div class="comment-wrapper">
     <div class="comment">
-      <div class="emoji">
+      <div class="emoji" :class="emojiName">
         {{emoji}}
       </div>
 
@@ -11,7 +11,7 @@
         </div>
 
         <div class="message">
-          {{message}}
+          {{message || '(추가 정보 없음)'}}
         </div>
       </div>
     </div>
@@ -24,7 +24,6 @@
 
   .comment {
     display: flex;
-    font-family: vars(--font);
     align-items: center;
     color: #202020;
     padding: 0 10px;
@@ -33,6 +32,20 @@
       font-size: 5rem;
       font-weight: 600;
       padding: 10px;
+      width: 55px;
+      text-align: center;
+
+      &.smile {
+        color: var(--smile-color);
+      }
+
+      &.norm {
+        color: var(--norm-color);
+      }
+
+      &.frown {
+        color: var(--frown-color);
+      }
     }
 
     & .message {
@@ -69,6 +82,10 @@ export default {
   computed: {
     emoji () {
       return [':(', ':|', ':)'][this.rating]
+    },
+
+    emojiName () {
+      return ['frown', 'norm', 'smile'][this.rating]
     },
 
     ago () {
