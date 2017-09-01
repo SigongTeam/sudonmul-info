@@ -1,15 +1,25 @@
+require('dotenv').config()
+
 const KLiveWater = require('k-live-water')
-const dateformat = require('dateformat')
+const mongoose = require('mongoose')
+const moment = require('moment')
 const Facility = require('../models/Facility')
-const config = require('./config')
 const geocoder = require('../utils/geocoder')
 
 module.exports = async () => {
-  const klw = new KLiveWater(config.key)
+  mongoose.Promise = global.Promise
+  await mongoose.connect(process.env.MONGODB_URI, {
+    keepAlive: true,
+    useMongoClient: true,
+    reconnectTries: Number.MAX_VALUE
+  })
+
+  const klw = new KLiveWater(process.env.PUBLIC_DATA_API_KEY)
   const list = await klw.getSupplyLgIdCodeList()
   console.log('called')
   for (const facility of list) {
-    console.log(facility)
+    if (await Facility.findOne({ name: facility.facilityName })) continue
+
     const data = {
       name: facility.facilityName,
       number: facility.code,
@@ -20,13 +30,11 @@ module.exports = async () => {
       },
       qualities: []
     }
-    const coordinates = await geocoder.getDByJuso(data.juso)
-    data.location.coordinates = coordinates
 
     for (const d in [...Array(31)]) {
       const stTm = '00'
-      const edTm = '01'
-      const stDt = dateformat(new Date(new Date().setDate(new Date().getDate() - 31 + d)), 'yyyy-mm-dd')
+      const edTm = '12'
+      const stDt = moment().subtract(31 - d, 'days').format('YYYY-MM-DD')
       const options = {
         stDt,
         stTm,
@@ -37,16 +45,22 @@ module.exports = async () => {
         pageNo: 1,
         sujCode: data.number
       }
-      console.log(options)
       const quality = (await klw.getWaterQuality(options))[0]
+      const coordinates = await geocoder.getDByJuso(data.juso)
+      data.location.coordinates = coordinates
+
+      if (!quality) continue
+
       data.qualities.push({
         date: new Date(stDt),
         clVal: quality.clVal,
         phVal: quality.phVal,
         tbVal: quality.tbVal
       })
-      const doc = await Facility.create(data)
-      console.log(doc)
     }
+    const doc = await Facility.create(data)
+    console.log(doc)
   }
 }
+
+module.exports().then(() => console.log('fin')).catch(console.error)
