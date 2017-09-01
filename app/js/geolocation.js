@@ -1,7 +1,7 @@
 import sweetalert from 'sweetalert'
 
-const errorPosition = { latitude: 37.5658049, longitude: 126.9745989 }
-const errorMessage = '현재 위치 정보를 불러올 수 없습니다.\n기본값으로 덕수궁을 불러옵니다.'
+const errorPosition = { latitude: 35.891823, longitude: 128.610743 }
+const errorMessage = '현재 위치 정보를 불러올 수 없습니다.\n기본값을 불러옵니다.'
 
 export default {
   async getParsedPosition () {

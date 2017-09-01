@@ -2,7 +2,7 @@
   <section class="location-section" ref="location">
     <div class="wrapper">
       <div class="inner">
-        {{ location }}
+        {{ mLocation }}
       </div>
     </div>
   </section>
@@ -23,13 +23,14 @@
       font-weight: 300;
       font-size: 4rem;
       min-height: 400px;
-      padding: 100px 50px;
+      padding: 8vw 50px;
       box-sizing: border-box;
 
       & .inner {
         color: #fff;
         max-width: 768px;
         margin: 0 auto;
+        word-break: keep-all;
       }
     }
   }
@@ -41,6 +42,18 @@ import Geolocation from '../js/geolocation'
 
 export default {
   data: () => ({ location: 'Loading...' }),
+
+  computed: {
+    mLocation () {
+      const index = this.location.lastIndexOf(', ')
+      if (index < 0) return this.location
+
+      const first = this.location.substring(0, index + 2)
+      const last = this.location.substring(index + 2)
+      return first + '\n' + last
+    }
+  },
+
   async mounted () {
     const location = await Geolocation.getParsedPosition()
     const { data } = await axios.post('/where', { location })
