@@ -1,6 +1,8 @@
 <template>
   <tap-section class="main-header" centered>
-    <img src="../img/logo.svg" alt="Logo">
+    <a href="">
+      <img src="../img/logo.svg" alt="Logo">
+    </a>
   </tap-section>
 </template>
 
