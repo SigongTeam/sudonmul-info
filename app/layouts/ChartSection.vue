@@ -25,17 +25,20 @@
 
 <script>
 import axios from 'axios'
+import moment from 'moment'
 import Chart from 'chart.js'
 import Geolocation from '../js/geolocation'
-import moment from 'moment'
 import TapSection from '../components/TapSection.vue'
 
 const chartConfig = {
   type: 'line',
+
   data: {
-    labels: [...Array(15)].map((v, k) => k).map(i => moment().subtract(i * 2, 'd').format('MM/DD')),
-    datasets: []
+    datasets: [],
+    labels: [...Array(15)].map((_, i) =>
+      moment().subtract(i * 2, 'd').format('MM/DD'))
   },
+
   options: {
     responsive: true,
     title: {
@@ -69,14 +72,11 @@ const chartConfig = {
   }
 }
 
-const cloneConfig = (db) => {
-  const defaultConfig = JSON.parse(JSON.stringify(chartConfig))
-  defaultConfig.data.datasets = db
-  return defaultConfig
-}
+const cloneConfig = db =>
+  Object.assign({}, chartConfig, { data: { datasets: db } })
 
 export default {
-  data: () => ({name: 'Loading..'}),
+  data: () => ({ name: 'Loading..' }),
   async mounted () {
     const location = await Geolocation.getParsedPosition()
 
@@ -84,6 +84,7 @@ export default {
       location: [location.latitude, location.longitude]
     })
 
+    this.name = res.data.name
     const qualities = res.data.qualities
 
     const valueSet = {
@@ -147,11 +148,8 @@ export default {
       ]
     }
 
-    this.name = res.data.name
-
-    const dataList = ['tb', 'cl', 'ph']
-
-    dataList.forEach((v) => new Chart(this.$refs[v].getContext('2d'), cloneConfig(valueSet[v])))
+    Object.keys(valueSet).forEach(v =>
+      new Chart(this.$refs[v].getContext('2d'), cloneConfig(valueSet[v])))
   },
 
   components: {

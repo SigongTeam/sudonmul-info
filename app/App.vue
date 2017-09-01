@@ -18,15 +18,16 @@
 
 <script>
 import './css/base.css'
-import LocationSection from './layouts/LocationSection.vue'
 import MainHeader from './layouts/MainHeader.vue'
-import ReviewSection from './layouts/ReviewSection.vue'
+import LocationSection from './layouts/LocationSection.vue'
 import WriteSection from './layouts/WriteSection.vue'
 import InfoSection from './layouts/InfoSection.vue'
 import ChartSection from './layouts/ChartSection.vue'
+import ReviewSection from './layouts/ReviewSection.vue'
 
 export default {
   data: () => ({ infoOpened: false }),
+
   components: {
     ChartSection,
     LocationSection,

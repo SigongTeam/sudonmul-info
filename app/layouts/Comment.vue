@@ -24,7 +24,6 @@
 
   .comment {
     display: flex;
-    font-family: vars(--font);
     align-items: center;
     color: #202020;
     padding: 0 10px;

@@ -8,6 +8,7 @@
 
 <style scoped>
   @import "@vars";
+
   .main-header {
     background-color: var(--header-background);
     height: 10vh;

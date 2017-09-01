@@ -114,11 +114,8 @@ export default {
     }
   },
 
+  components: { Comment },
   data: () => ({ bars: [] }),
-
-  components: {
-    Comment
-  },
 
   methods: {
     getRatings (rating) {
@@ -128,29 +125,28 @@ export default {
 
   computed: {
     indice () {
-      let indice = 0
-      emojiNames.forEach((emoji, rating) => {
-        // Rating = Coefficient, Indice -> Min: 0, Max: comments.length * 2;
-        indice += this.getRatings(rating) * rating
-      })
+      const indice = emojiNames
+        .map((_, rating) => rating * this.getRatings(rating))
+        .reduce((a, b) => a + b, 0)
 
-      return (indice / (this.comments.length * 2)) * 100
+      return indice / (this.comments.length * 2)
+      // Rating = Coefficient, Indice -> Min: 0, Max: comments.length * 2
     },
 
     indiceText () {
-      return `${Math.round(this.indice)}%`
+      return `${(100 * this.indice).toFixed(1)}%`
     },
 
     indiceGrade () {
-      return gradeNames[Math.min(gradeNames.length - 1, Math.floor(this.indice / 100 * gradeNames.length))]
+      const index = Math.floor(this.indice * gradeNames.length)
+      return gradeNames[Math.min(gradeNames.length - 1, index)]
     }
   },
 
   updated () {
     emojiNames.forEach((emoji, rating) => {
-      const sameRatings = this.comments.filter(c => c.rating === rating)
-      const percentage = (sameRatings.length / this.comments.length) * 100
-      this.$refs[emoji].style.width = `${percentage}%`
+      const percentage = this.getRatings(rating) / this.comments.length
+      this.$refs[emoji].style.width = `${percentage * 100}%`
     })
   }
 }

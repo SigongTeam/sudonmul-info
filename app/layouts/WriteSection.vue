@@ -42,7 +42,6 @@
     &>button {
       width: 25%;
       height: 100px;
-      font-family: var(--font);
       font-weight: 600;
       font-size: 3rem;
     }
@@ -73,7 +72,13 @@ import TapButton from '../components/TapButton.vue'
 import TapSection from '../components/TapSection.vue'
 
 export default {
-  data: () => ({opened: false, context: -1, supportsWriting: true, finished: false, comment: ''}),
+  data: () => ({
+    opened: false,
+    context: -1,
+    supportsWriting: true,
+    finished: false,
+    comment: ''
+  }),
 
   components: {
     Icon,
@@ -109,6 +114,7 @@ export default {
 
       this.$emit('write')
       this.close()
+
       if (this.supportsWriting) {
         this.finished = true
       }

@@ -2,7 +2,7 @@
   <section class="location-section" ref="location">
     <div class="wrapper">
       <div class="inner">
-        {{location}}
+        {{ location }}
       </div>
     </div>
   </section>
