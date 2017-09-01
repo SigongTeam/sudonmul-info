@@ -1,5 +1,5 @@
 const count = 2
-const Review = require('../models/Review')
+const Review = require('../../models/Review')
 
 const ips = require('./ips')
 const ratings = require('./ratings')
@@ -17,4 +17,4 @@ const review = () => new Review({
 
 module.exports = () => Promise
   .all([...Array(count)].map(review).map(r => r.save()))
-  .then(() => console.log(`Created ${count} dummy data`))
+  .then(() => console.log(`Created ${count} dummy data for review`))
