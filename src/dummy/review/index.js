@@ -9,11 +9,11 @@ const timestamps = require('./timestamps')
 
 const { geocoder } = require('../../utils')
 
-const review = () => {
+const review = async () => {
   const juso = jusos()
-  const location = geocoder.getDByJuso(juso)
+  const location = await geocoder.getDByJuso(juso)
 
-  return new Review({
+  const review = new Review({
     ip: ips(),
     rating: ratings(),
     message: messages(),
@@ -22,8 +22,9 @@ const review = () => {
     juso,
     location: { type: 'Point', coordinates: location }
   })
+
+  return review.save()
 }
 
-module.exports = () => Promise
-  .all([...Array(count)].map(review).map(r => r.save()))
+module.exports = () => Promise.all([...Array(count)].map(review))
   .then(() => console.log(`Created ${count} dummy data for review`))

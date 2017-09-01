@@ -1,7 +1,7 @@
 const axios = require('axios')
 const ENDPOINT_URI = 'https://maps.googleapis.com/maps/api/geocode/json'
 
-module.exports = class Geocoder {
+module.exports = {
   async get (params) {
     const { data } = await axios.get(ENDPOINT_URI, { params })
 
@@ -14,7 +14,7 @@ module.exports = class Geocoder {
     }
 
     return data
-  }
+  },
 
   /**
    * @param {String} juso 도로명 주소
@@ -29,7 +29,7 @@ module.exports = class Geocoder {
     const { lat, lng } = result.geometry.location
 
     return [lat, lng]
-  }
+  },
 
   /**
    * @param {Array} dCode
