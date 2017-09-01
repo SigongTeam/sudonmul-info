@@ -19,11 +19,11 @@ module.exports = async () => {
 
   for (const facility of list) {
     if (await Facility.findOne({ name: facility.facilityName })) continue
-    if (facility.code in [366, 336]) continue // 예외
+    console.log(facility)
     const data = {
       name: facility.facilityName,
       number: facility.code,
-      juso: facility.lgIdFullAddr.replace(/\s+/g, ' ').split(' ').splice(0, 2).join(' '),
+      juso: '',
       location: {
         type: 'Point',
         coordinates: []
@@ -31,9 +31,9 @@ module.exports = async () => {
       qualities: []
     }
 
-    for (const d in [...Array(31)]) {
+    for (const d of Object.keys([...Array(31)])) {
       const stTm = '00'
-      const edTm = '12'
+      const edTm = '03'
       const stDt = moment().subtract(31 - d, 'days').format('YYYY-MM-DD')
       const options = {
         stDt,
@@ -46,11 +46,9 @@ module.exports = async () => {
         sujCode: data.number
       }
       const quality = (await klw.getWaterQuality(options))[0]
-      const coordinates = await geocoder.getDByJuso(data.juso)
-      data.location.coordinates[0] = coordinates[1]
-      data.location.coordinates[1] = coordinates[0]
-
       if (!quality) continue
+
+      data.juso = quality.facilityAddr
       data.qualities.push({
         date: new Date(stDt),
         clVal: quality.clVal,
@@ -59,6 +57,12 @@ module.exports = async () => {
       })
     }
     if (data.qualities.length === 0) continue
+
+    const coordinates = await geocoder.getDByJuso(data.juso)
+    data.location.coordinates[0] = coordinates[1]
+    data.location.coordinates[1] = coordinates[0]
+
+    console.log(data)
     const doc = await Facility.create(data)
     console.log(doc.name, doc.number, data.qualities.length)
   }
