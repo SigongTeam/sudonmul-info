@@ -2,9 +2,9 @@
   <tap-section class="write-section" :class="{finished}">
     <h2>수돗물 평가하기</h2>
     <div class="button-wrapper">
-      <tap-button @click="open(2)">:)</tap-button>
-      <tap-button @click="open(1)">:|</tap-button>
-      <tap-button @click="open(0)">:(</tap-button>
+      <tap-button @click="open(2)" class="smile">:)</tap-button>
+      <tap-button @click="open(1)" class="norm">:|</tap-button>
+      <tap-button @click="open(0)" class="frown">:(</tap-button>
     </div>
     <modal :opened="openStatus" @close="close" class="modal">
       <div class="modal-inner">

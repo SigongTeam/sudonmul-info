@@ -41,7 +41,6 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-    padding: 0 20px;
     flex: 1;
   }
 
@@ -51,6 +50,7 @@
 
   .stat {
     display: flex;
+    padding: 0 20px;
   }
 
   .stat-wrapper {
@@ -104,7 +104,7 @@
 import Comment from './Comment.vue'
 
 const emojiNames = ['frown', 'norm', 'smile']
-const gradeNames = ['매우 좋음', '좋음', '약간 좋음', '그럭저럭', '약간 좋지 않음', '좋지 않음', '매우 좋지 않음']
+const gradeNames = [ '매우 좋지 않음', '좋지 않음', '약간 좋지 않음', '그럭저럭', '약간 좋음', '좋음', '매우 좋음']
 
 export default {
   props: {
