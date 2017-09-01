@@ -4,6 +4,8 @@ const ENDPOINT_URI = 'https://maps.googleapis.com/maps/api/geocode/json'
 module.exports = {
   async get (params) {
     params.language = 'ko'
+    params.key = process.env.GA_KEY
+
     const { data } = await axios.get(ENDPOINT_URI, { params })
 
     if (!data || !data.results || !data.status) {
