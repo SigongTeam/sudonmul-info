@@ -40,7 +40,7 @@ export default {
       const location = await Geolocation.getParsedPosition()
 
       axios
-        .get('/review', { location })
+        .get('/review', { params: { location } })
         .then(res => (this.reviews = res.data))
         .catch(err => alert(err))
     }

@@ -17,8 +17,10 @@ const schema = mongoose.Schema({
 
 schema.statics = {
   async getReviews (ctx) {
-    const { location } = ctx.request.body
-    const { name: facilityName } = await Facility.mulloc(location)
+    const location = JSON.parse(ctx.query.location)
+    const dCode = [location.latitude, location.longitude]
+
+    const { name: facilityName } = await Facility.mulloc(dCode)
     ctx.body = await this.find({ facilityName }).sort('-timestamp').limit(30).exec()
   },
 
