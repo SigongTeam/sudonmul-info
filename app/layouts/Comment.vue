@@ -11,7 +11,7 @@
         </div>
 
         <div class="message">
-          {{message || '(추가 정보 없음)'}}
+          {{message || '(내용 없음)'}}
         </div>
 
         <div class="juso">
