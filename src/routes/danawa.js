@@ -13,20 +13,19 @@ const delay = (func, time) =>
   new Promise((resolve, reject) =>
     setTimeout(() => func().then(resolve), time))
 
-module.exports = new Router({ prefix: '/danawa' })
-  .get('/', async (ctx, next) => {
-    const chrome = await launch({ startingUrl, chromeFlags })
-    const protocol = await CDP({ port: chrome.port })
+module.exports = new Router({ prefix: '/danawa' }).get('/', async ctx => {
+  const chrome = await launch({ startingUrl, chromeFlags })
+  const protocol = await CDP({ port: chrome.port })
 
-    const { Page, Runtime } = protocol
-    await Promise.all([Page.enable(), Runtime.enable()])
-    await Page.loadEventFired()
+  const { Page, Runtime } = protocol
+  await Promise.all([Page.enable(), Runtime.enable()])
+  await Page.loadEventFired()
 
-    await delay(async () => {
-      const { result } = await Runtime.evaluate({ expression, returnByValue: true })
-      ctx.body = result.value
+  await delay(async () => {
+    const res = await Runtime.evaluate({ expression, returnByValue: true })
+    ctx.body = res.result.value
 
-      protocol.close()
-      chrome.kill()
-    }, 5000)
-  })
+    protocol.close()
+    chrome.kill()
+  }, 5000)
+})
