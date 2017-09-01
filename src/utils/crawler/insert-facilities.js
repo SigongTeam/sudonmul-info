@@ -16,10 +16,10 @@ module.exports = async () => {
 
   const klw = new KLiveWater(process.env.PUBLIC_DATA_API_KEY)
   const list = await klw.getSupplyLgIdCodeList()
-  console.log('called')
+
   for (const facility of list) {
     if (await Facility.findOne({ name: facility.facilityName })) continue
-
+    if (facility.code in [366, 336]) continue // 예외
     const data = {
       name: facility.facilityName,
       number: facility.code,
@@ -47,10 +47,10 @@ module.exports = async () => {
       }
       const quality = (await klw.getWaterQuality(options))[0]
       const coordinates = await geocoder.getDByJuso(data.juso)
-      data.location.coordinates = coordinates
+      data.location.coordinates[0] = coordinates[1]
+      data.location.coordinates[1] = coordinates[0]
 
       if (!quality) continue
-
       data.qualities.push({
         date: new Date(stDt),
         clVal: quality.clVal,
@@ -58,9 +58,13 @@ module.exports = async () => {
         tbVal: quality.tbVal
       })
     }
+    if (data.qualities.length === 0) continue
     const doc = await Facility.create(data)
-    console.log(doc)
+    console.log(doc.name, doc.number, data.qualities.length)
   }
 }
 
-module.exports().then(() => console.log('fin')).catch(console.error)
+module.exports().then(() => console.log('fin')).catch(err => {
+  console.error(err)
+  module.exports()
+})
