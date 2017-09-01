@@ -36,7 +36,7 @@ module.exports = {
    */
   async getJusoByD (dCode) {
     const data = await this.get({
-      latlng: dCode
+      latlng: dCode.join(',')
     })
 
     const result = data.results[0]

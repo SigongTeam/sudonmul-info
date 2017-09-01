@@ -8,5 +8,7 @@ module.exports = () => async (ctx, next) => {
 
     if (isServer) ctx.app.emit('error', err, ctx)
     ;[ctx.body, ctx.status] = [output.payload, output.statusCode]
+
+    if (err.response) console.error(err.response)
   }
 }
