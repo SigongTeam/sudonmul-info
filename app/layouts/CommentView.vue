@@ -104,7 +104,7 @@
 import Comment from './Comment.vue'
 
 const emojiNames = ['frown', 'norm', 'smile']
-const gradeNames = [ '매우 좋지 않음', '좋지 않음', '약간 좋지 않음', '그럭저럭', '약간 좋음', '좋음', '매우 좋음']
+const gradeNames = ['매우 좋지 않음', '좋지 않음', '약간 좋지 않음', '그럭저럭', '약간 좋음', '좋음', '매우 좋음']
 
 export default {
   props: {

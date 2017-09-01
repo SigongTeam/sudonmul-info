@@ -21,9 +21,6 @@ import MainHeader from './layouts/MainHeader.vue'
 import ReviewSection from './layouts/ReviewSection.vue'
 import WriteSection from './layouts/WriteSection.vue'
 
-import axios from 'axios'
-import Geolocation from './js/geolocation'
-
 export default {
   components: {
     LocationSection,

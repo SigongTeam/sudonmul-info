@@ -45,7 +45,7 @@ export default {
     const location = await Geolocation.getParsedPosition()
     const { data } = await axios.post('/where', { location })
 
-    this.location = data.juso;
+    this.location = data.juso
   }
 }
 </script>
