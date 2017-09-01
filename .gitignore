@@ -63,3 +63,5 @@ typings/
 # IntelliJ
 .idea
 *.iml
+
+src/crawler/config.js
