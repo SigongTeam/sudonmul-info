@@ -1,7 +1,11 @@
 <template>
   <tap-section class="chart-section">
     <h1>정수장 수질 정보</h1>
-    <h3>{{ name }}</h3>
+    <h3>
+      {{ name }}
+      <h5>{{ juso }}</h5>
+    </h3>
+
     <canvas ref="tb"></canvas>
     <canvas ref="ph"></canvas>
     <canvas ref="cl"></canvas>
@@ -66,7 +70,7 @@ const cloneConfig = (datasets, labels) =>
   Object.assign({ data: { labels, datasets } }, chartConfig)
 
 export default {
-  data: () => ({ name: 'Loading..' }),
+  data: () => ({ name: 'Loading..', juso: '정수장 정보를 불러오는 중입니다...' }),
   async mounted () {
     const location = await Geolocation.getParsedPosition()
 
@@ -149,6 +153,8 @@ export default {
     }
 
     this.name = res.data.name
+    this.juso = res.data.juso
+
     Object.keys(values).forEach(v =>
       new Chart(this.$refs[v].getContext('2d'), cloneConfig(values[v], labels)))
   },
