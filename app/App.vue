@@ -2,9 +2,9 @@
   <main id="app">
     <main-header></main-header>
     <location-section></location-section>
-    <write-section @write="refresh"></write-section>
+    <write-section @write="write"></write-section>
+    <info-section :opened="infoOpened"></info-section>
     <review-section ref="review"></review-section>
-    <info-section></info-section>
   </main>
 </template>
 
@@ -24,6 +24,7 @@ import WriteSection from './layouts/WriteSection.vue'
 import InfoSection from './layouts/InfoSection.vue'
 
 export default {
+  data: () => ({ infoOpened: false }),
   components: {
     LocationSection,
     MainHeader,
@@ -33,8 +34,9 @@ export default {
   },
 
   methods: {
-    refresh () {
+    write () {
       this.$refs.review.refresh()
+      this.infoOpened = true
     }
   }
 }
