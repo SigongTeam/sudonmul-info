@@ -14,6 +14,12 @@
     background: transparent;
     cursor: pointer;
     outline: none;
+    transition: all .5s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, .9);
+      color: #303030;
+    }
   }
 </style>
 

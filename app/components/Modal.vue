@@ -10,7 +10,7 @@
   </transition>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
   .backdrop {
      background: rgba(0, 0, 0, 0.6);
      position: fixed;
@@ -23,10 +23,10 @@
 
   .modal-view {
      position: fixed;
-     left: 15vw;
-     top: 15vh;
-     width: 70vw;
-     height: 70vh;
+     left: 30vw;
+     top: 30vh;
+     width: 40vw;
+     height: 40vh;
      background: #fff;
      z-index: 100;
   }
@@ -45,7 +45,12 @@
   }
 
   .modal-enter, .modal-leave-active {
-    & .modal-view, .backdrop {
+    & .modal-view {
+      opacity: 0;
+      transform: scale(1.1);
+    }
+
+    & .backdrop {
       opacity: 0;
       transform: scale(1.1);
     }

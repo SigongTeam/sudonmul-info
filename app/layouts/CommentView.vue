@@ -1,19 +1,25 @@
 <template>
   <section class="comment-view">
-    <div class="graphs">
-      <div class="progress-container">
-        <div class="text">:(</div>
-        <div class="graph" ref="frown"></div>
-      </div>
+    <div class="stat">
+      <div class="graphs">
+        <div class="progress-container">
+          <div class="text">:(</div>
+          <div class="graph" ref="frown"></div>
+        </div>
 
-      <div class="progress-container">
-        <div class="text">:|</div>
-        <div class="graph" ref="norm"></div>
-      </div>
+        <div class="progress-container">
+          <div class="text">:|</div>
+          <div class="graph" ref="norm"></div>
+        </div>
 
-      <div class="progress-container">
-        <div class="text">:)</div>
-        <div class="graph" ref="smile"></div>
+        <div class="progress-container">
+          <div class="text">:)</div>
+          <div class="graph" ref="smile"></div>
+        </div>
+      </div>
+      <div class="stat-wrapper" v-if="indice">
+        <div class="stat-grade">{{indiceGrade}}</div>
+        <div class="stat-text">{{indiceText}}</div>
       </div>
     </div>
 
@@ -36,6 +42,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    flex: 1;
   }
 
   .comment-list {
@@ -44,6 +51,24 @@
 
   hr {
     margin: 0 .1rem;
+  }
+
+  .stat {
+    display: flex;
+  }
+
+  .stat-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-text {
+    font-size: 5rem;
+    font-weight: 600;
+  }
+
+  .stat-grade {
+    font-size: 1.7rem;
   }
 
   .progress-container {
@@ -71,6 +96,7 @@
 import Comment from './Comment.vue'
 
 const emojiNames = ['frown', 'norm', 'smile']
+const gradeNames = ['매우 좋음', '좋음', '약간 좋음', '그럭저럭', '약간 좋지 않음', '좋지 않음', '매우 좋지 않음']
 
 export default {
   props: {
@@ -84,6 +110,32 @@ export default {
 
   components: {
     Comment
+  },
+
+  methods: {
+    getRatings (rating) {
+      return this.comments.filter(c => c.rating === rating).length
+    }
+  },
+
+  computed: {
+    indice () {
+      let indice = 0
+      emojiNames.forEach((emoji, rating) => {
+        // Rating = Coefficient, Indice -> Min: 0, Max: comments.length * 2;
+        indice += this.getRatings(rating) * rating
+      })
+
+      return (indice / (this.comments.length * 2)) * 100
+    },
+
+    indiceText () {
+      return `${Math.round(this.indice)}%`
+    },
+
+    indiceGrade () {
+      return gradeNames[Math.min(gradeNames.length - 1, Math.floor(this.indice / 100 * gradeNames.length))]
+    }
   },
 
   updated () {
