@@ -3,7 +3,6 @@ const Review = require('../models/Review')
 const { geocoder } = require('../utils')
 
 module.exports = new Router({ prefix: '/review' })
-
   .get('/', async ctx =>
     (ctx.body = await Review.find().sort('-timestamp').exec()))
 
