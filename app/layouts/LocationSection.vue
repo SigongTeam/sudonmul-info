@@ -22,9 +22,13 @@
       background: rgba(0, 0, 0, .7);
       font-weight: 300;
       font-size: 4rem;
-      min-height: 400px;
+      min-height: 25vh;
       padding: 8vw 50px;
       box-sizing: border-box;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       & .inner {
         color: #fff;
