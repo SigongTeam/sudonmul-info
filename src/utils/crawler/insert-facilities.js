@@ -3,8 +3,8 @@ require('dotenv').config()
 const KLiveWater = require('k-live-water')
 const mongoose = require('mongoose')
 const moment = require('moment')
-const Facility = require('../models/Facility')
-const geocoder = require('../utils/geocoder')
+const Facility = require('../../models/Facility')
+const geocoder = require('../geocoder')
 
 module.exports = async () => {
   mongoose.Promise = global.Promise
