@@ -15,7 +15,7 @@
   h1 {
     font-weight: 600;
   }
-  
+
   .info-section {
     background: var(--info-background);
     color: #fff;
@@ -25,6 +25,7 @@
     max-height: 0;
     padding: 0;
     transition: all .4s ease;
+    font-size: 1.5em;
 
     &.opened {
       padding: 20px 0;
@@ -33,7 +34,8 @@
   }
 
   p.fineprint {
-    font-size: .8rem;
+    margin-top: 0.5em;
+    font-size: 0.6em;
   }
 </style>
 
