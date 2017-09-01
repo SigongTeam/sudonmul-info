@@ -1,7 +1,7 @@
 <template>
   <tap-section class="chart-section">
     <h1>정수장 수질 정보</h1>
-    <h3>{{name}}</h3>
+    <h3>{{ name }}</h3>
     <canvas ref="tb"></canvas>
     <canvas ref="ph"></canvas>
     <canvas ref="cl"></canvas>
@@ -33,18 +33,8 @@ import TapSection from '../components/TapSection.vue'
 const chartConfig = {
   type: 'line',
 
-  data: {
-    datasets: [],
-    labels: [...Array(15)].map((_, i) =>
-      moment().subtract(i * 2, 'd').format('MM/DD'))
-  },
-
   options: {
     responsive: true,
-    title: {
-      display: true,
-      text: '정수지 수질 정보'
-    },
     tooltips: {
       mode: 'index',
       intersect: false
@@ -72,8 +62,8 @@ const chartConfig = {
   }
 }
 
-const cloneConfig = db =>
-  Object.assign({}, chartConfig, { data: { datasets: db } })
+const cloneConfig = (datasets, labels) =>
+  Object.assign({ data: { labels, datasets } }, chartConfig)
 
 export default {
   data: () => ({ name: 'Loading..' }),
@@ -84,24 +74,41 @@ export default {
       location: [location.latitude, location.longitude]
     })
 
-    this.name = res.data.name
     const qualities = res.data.qualities
-
-    const valueSet = {
+    const labels = qualities.map(q => moment(q.date).format('MM/DD'))
+    const values = {
       tb: [
         {
           label: '탁도 (NTU)',
           backgroundColor: '#00adb5',
           borderColor: '#00adb5',
-          data: qualities.map((v) => v.tbVal),
+          data: qualities.map(v => v.tbVal),
           fill: false
         },
 
         {
           label: '최대 기준치',
           backgroundColor: 'rgba(128, 128, 128, .2)',
-          borderColor: '#999',
-          data: [...Array(15)].map((v) => 1),
+          borderColor: '#BBB',
+          data: [...Array(qualities.length)].map(v => 1),
+          fill: 'origin'
+        }
+      ],
+
+      cl: [
+        {
+          label: '잔류 염소 농도 (mg/L)',
+          backgroundColor: '#ff5722',
+          borderColor: '#ff5722',
+          data: qualities.map(v => v.clVal),
+          fill: false
+        },
+
+        {
+          label: '최대 기준치',
+          backgroundColor: 'rgba(128, 128, 128, .2)',
+          borderColor: '#BBB',
+          data: [...Array(qualities.length)].map(v => 2),
           fill: 'origin'
         }
       ],
@@ -111,45 +118,31 @@ export default {
           label: 'pH 산도',
           backgroundColor: '#ffc107',
           borderColor: '#ffc107',
-          data: qualities.map((v) => v.phVal),
+          data: qualities.map(v => v.phVal),
           fill: false
         },
+
         {
           label: '최대 기준치',
           backgroundColor: 'rgba(128, 128, 128, .2)',
-          borderColor: '#999',
-          data: [...Array(15)].map((v) => 8.5),
+          borderColor: '#BBB',
+          data: [...Array(qualities.length)].map(v => 8.5),
           fill: 2
         },
+
         {
           label: '최소 기준치',
           backgroundColor: 'rgba(128, 128, 128, .2)',
-          borderColor: '#999',
-          data: [...Array(15)].map((v) => 5.8),
+          borderColor: '#BBB',
+          data: [...Array(qualities.length)].map(v => 5.8),
           fill: false
-        }
-      ],
-
-      cl: [
-        {
-          label: '잔류 염소 농도 (mg/L)',
-          backgroundColor: '#ff5722',
-          borderColor: '#ff5722',
-          data: qualities.map((v) => v.clVal),
-          fill: false
-        },
-        {
-          label: '최대 기준치',
-          backgroundColor: 'rgba(128, 128, 128, .2)',
-          borderColor: '#999',
-          data: [...Array(15)].map((v) => 2),
-          fill: 'origin'
         }
       ]
     }
 
-    Object.keys(valueSet).forEach(v =>
-      new Chart(this.$refs[v].getContext('2d'), cloneConfig(valueSet[v])))
+    this.name = res.data.name
+    Object.keys(values).forEach(v =>
+      new Chart(this.$refs[v].getContext('2d'), cloneConfig(values[v], labels)))
   },
 
   components: {
