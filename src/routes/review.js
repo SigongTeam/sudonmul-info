@@ -5,17 +5,15 @@ const { geocoder } = require('../utils')
 module.exports = new Router({ prefix: '/review' })
 
   .get('/', async ctx =>
-    (ctx.body = await Review.find().exec()))
-
-  .get('/:location', async ctx =>
-    (ctx.body = await Review.find({ location }).exec()))
+    (ctx.body = await Review.find().sort('-timestamp').exec()))
 
   .post('/', async ctx => {
     const { location, rating, comment } = ctx.request.body
+    const latlng = [location.latitude, location.longitude]
 
     const review = new Review({
-      juso: geocoder.getJusoByD(location),
-      location: { type: 'Point', coordinates: location },
+      juso: geocoder.getJusoByD(latlng),
+      location: { type: 'Point', coordinates: latlng },
 
       rating,
       message: comment,
