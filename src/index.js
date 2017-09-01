@@ -37,11 +37,11 @@ function startApp () {
 
   app
     .use(logger())
+    .use(enforceHttps())
     .use(conditional())
     .use(etag())
     .use(bodyParser())
     .use(boom())
-    .use(enforceHttps())
     .use(routes())
     .use(serve(dist, { maxage: 1000 * 60 * 30 }))
 
