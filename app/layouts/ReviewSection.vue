@@ -1,7 +1,7 @@
 <template>
   <tap-section class="review-section">
     <h2>리뷰</h2>
-    <comment-view :comments="dummy"></comment-view>
+    <comment-view :comments="reviews"></comment-view>
   </tap-section>
 </template>
 
@@ -17,7 +17,9 @@
 </style>
 
 <script>
+import axios from 'axios'
 import CommentView from './CommentView.vue'
+import Geolocation from '../js/geolocation.js'
 import TapSection from '../components/TapSection.vue'
 
 export default {
@@ -26,12 +28,18 @@ export default {
     TapSection
   },
 
-  data: () => ({ dummy: [] }),
+  data: () => ({ reviews: [] }),
 
-  created () {
-    fetch('/review')
-      .then(res => res.json())
-      .then(json => (this.dummy = json))
+  async created () {
+    const location = await Geolocation.getParsedPosition()
+
+    axios
+      .get('/review', {
+        params: {
+          location
+        }
+      })
+      .then(res => (this.reviews = res.data))
       .catch(err => alert(err))
   }
 }
