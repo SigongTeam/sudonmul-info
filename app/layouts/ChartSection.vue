@@ -49,11 +49,7 @@ const chartConfig = {
     },
     scales: {
       xAxes: [{
-        display: true,
-        scaleLabel: {
-          display: true,
-          labelString: 'Month'
-        }
+        display: true
       }],
       yAxes: [{
         display: true,
@@ -91,10 +87,18 @@ export default {
         },
 
         {
-          label: 'K-water 기준치',
+          label: '5-Star 수준 수질',
           backgroundColor: 'rgba(128, 128, 128, .2)',
           borderColor: '#BBB',
           data: [...Array(qualities.length)].map(v => 0.05),
+          fill: 'origin'
+        },
+
+        {
+          label: 'K-water 목표 수질',
+          backgroundColor: 'rgba(128, 128, 128, .2)',
+          borderColor: '#BBB',
+          data: [...Array(qualities.length)].map(v => 0.1),
           fill: 'origin'
         }
       ],
