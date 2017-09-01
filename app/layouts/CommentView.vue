@@ -4,17 +4,17 @@
       <div class="graphs">
         <div class="progress-container">
           <div class="text">:(</div>
-          <div class="graph" ref="frown"></div>
+          <div class="graph frown" ref="frown"></div>
         </div>
 
         <div class="progress-container">
           <div class="text">:|</div>
-          <div class="graph" ref="norm"></div>
+          <div class="graph norm" ref="norm"></div>
         </div>
 
         <div class="progress-container">
           <div class="text">:)</div>
-          <div class="graph" ref="smile"></div>
+          <div class="graph smile" ref="smile"></div>
         </div>
       </div>
       <div class="stat-wrapper" v-if="indice">
@@ -37,16 +37,12 @@
 
 <style>
   @import "@vars";
-
   .graphs {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    padding: 0 20px;
     flex: 1;
-  }
-
-  .comment-list {
-    background: #fff;
   }
 
   hr {
@@ -88,6 +84,18 @@
       height: 20px;
       width: 0;
       transition: width 2s ease;
+
+      &.smile {
+        background: var(--smile-color);
+      }
+
+      &.norm {
+        background: var(--norm-color);
+      }
+
+      &.frown {
+        background: var(--frown-color);
+      }
     }
   }
 </style>

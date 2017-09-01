@@ -82,6 +82,7 @@
     "skeleton-css": "^2.0.4",
     "typeface-spoqa-han-sans2": "^2.1.2",
     "vue": "^2.4.2",
+    "vue-carousel": "^0.6.5",
     "vue-router": "^2.7.0"
   }
 }
