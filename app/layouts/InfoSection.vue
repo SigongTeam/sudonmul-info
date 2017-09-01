@@ -22,7 +22,8 @@ export default {
   computed: {
     averagePrice () {
       const sum = this.danawa.reduce((a, b) => a + b, 0)
-      return 0.15 * sum * (this.danawa.length || 1) // 2L -> 300mL
+      const average = sum / (this.danawa.length || 1)
+      return 300 / 2000 * average // 2L 가격 -> 300mL
     }
   },
 
