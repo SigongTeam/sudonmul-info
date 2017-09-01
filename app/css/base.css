@@ -10,3 +10,7 @@
 html, body {
   font-family: var(--font);
 }
+
+.sa-confirm-button-container button {
+  height: inherit;
+}
