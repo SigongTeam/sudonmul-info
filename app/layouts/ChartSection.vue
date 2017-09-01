@@ -87,10 +87,10 @@ export default {
         },
 
         {
-          label: '최대 기준치',
+          label: 'K-water 기준치',
           backgroundColor: 'rgba(128, 128, 128, .2)',
           borderColor: '#BBB',
-          data: [...Array(qualities.length)].map(v => 1),
+          data: [...Array(qualities.length)].map(v => 0.05),
           fill: 'origin'
         }
       ],
@@ -105,11 +105,19 @@ export default {
         },
 
         {
-          label: '최대 기준치',
+          label: 'K-water 상한 기준치',
           backgroundColor: 'rgba(128, 128, 128, .2)',
           borderColor: '#BBB',
-          data: [...Array(qualities.length)].map(v => 2),
-          fill: 'origin'
+          data: [...Array(qualities.length)].map(v => 1),
+          fill: 2
+        },
+
+        {
+          label: '최소 기준치',
+          backgroundColor: 'rgba(128, 128, 128, .2)',
+          borderColor: '#BBB',
+          data: [...Array(qualities.length)].map(v => 0.09),
+          fill: false
         }
       ],
 
