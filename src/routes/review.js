@@ -11,7 +11,7 @@ module.exports = new Router({ prefix: '/review' })
     const latlng = [location.latitude, location.longitude]
 
     const review = new Review({
-      juso: geocoder.getJusoByD(latlng),
+      juso: await geocoder.getJusoByD(latlng),
       location: { type: 'Point', coordinates: latlng },
 
       rating,
