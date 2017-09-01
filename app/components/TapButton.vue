@@ -17,8 +17,20 @@
     transition: all .5s ease;
 
     &:hover {
-      background: rgba(255, 255, 255, .9);
-      color: #303030;
+      &.smile {
+        border-color: var(--smile-color);
+        color: var(--smile-color);
+      }
+
+      &.norm {
+        border-color: var(--norm-color);
+        color: var(--norm-color);
+      }
+
+      &.frown {
+        border-color: var(--frown-color);
+        color: var(--frown-color);
+      }
     }
   }
 </style>

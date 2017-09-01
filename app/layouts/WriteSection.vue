@@ -2,11 +2,11 @@
   <tap-section class="write-section" :class="{finished}">
     <h2>수돗물 평가하기</h2>
     <div class="button-wrapper">
-      <tap-button @click="open(2)">:)</tap-button>
-      <tap-button @click="open(1)">:|</tap-button>
-      <tap-button @click="open(0)">:(</tap-button>
+      <tap-button @click="open(2)" class="smile">:)</tap-button>
+      <tap-button @click="open(1)" class="norm">:|</tap-button>
+      <tap-button @click="open(0)" class="frown">:(</tap-button>
     </div>
-    <modal :opened="openStatus" @close="close" class="modal">
+    <modal :opened="openStatus" :backdropClosable="true" @close="close" class="modal">
       <div class="modal-inner">
         <textarea placeholder="자세한 리뷰를 남겨주세요! (선택사항)" v-model="comment"></textarea>
         <button class="send" @click="send(opened)">
@@ -64,7 +64,9 @@
 </style>
 
 <script>
-import Geolocation from '../js/geolocation.js'
+import axios from 'axios'
+import Geolocation from '../js/geolocation'
+
 import Icon from '../components/Icon.vue'
 import Modal from '../components/Modal.vue'
 import TapButton from '../components/TapButton.vue'
@@ -93,8 +95,8 @@ export default {
       this.opened = false
     },
 
-    send (rating) {
-      const location = await Geolocation.getParsedPosition();
+    async send (rating) {
+      const location = await Geolocation.getParsedPosition()
 
       const data = {
         location,
@@ -102,13 +104,7 @@ export default {
         comment: this.comment
       }
 
-      await fetch('/review', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
+      await axios.post('/review', { data })
 
       this.close()
       if (this.supportsWriting) {

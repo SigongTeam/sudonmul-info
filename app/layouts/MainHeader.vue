@@ -1,6 +1,8 @@
 <template>
   <tap-section class="main-header" centered>
-    <img src="../img/logo.svg" alt="Logo">
+    <a class="header-link" href="/">
+      <img src="../img/logo.svg" alt="Logo">
+    </a>
   </tap-section>
 </template>
 
@@ -12,8 +14,12 @@
     font-size: 4rem;
     color: #fff;
 
-    & img {
-      height: calc(10vh - 20px);
+    & .header-link {
+      display: flex;
+
+      & img {
+        height: calc(10vh - 20px);
+      }
     }
   }
 </style>

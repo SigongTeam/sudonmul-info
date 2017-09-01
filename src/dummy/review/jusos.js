@@ -1,4 +1,4 @@
-const locations = [
+const jusos = [
   '서울 강남구 압구정로50길 7',
   '경기 부천시 길주로 300',
   '경기 고양시 일산동구 장진천길46번길 22-11',
@@ -14,4 +14,4 @@ const locations = [
   '서울 서대문구 연세로9길 10-7'
 ]
 
-module.exports = () => locations[Math.floor(Math.random() * locations.length)]
+module.exports = () => jusos[Math.floor(Math.random() * jusos.length)]

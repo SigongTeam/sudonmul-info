@@ -1,16 +1,24 @@
 const Router = require('koa-router')
 const Review = require('../models/Review')
+const { geocoder } = require('../utils')
 
 module.exports = new Router({ prefix: '/review' })
-
   .get('/', async ctx =>
-    (ctx.body = await Review.find().exec()))
-
-  .get('/:location', async ctx =>
-    (ctx.body = await Review.find({ location }).exec()))
+    (ctx.body = await Review.find().sort('-timestamp').exec()))
 
   .post('/', async ctx => {
-    // TODO body->location = Geolocation::getParsedPosition
-    // TODO body->rating = 0 (frown), 1 (norm), 2 (smile)
-    // TODO body->comment = Review text
+    const { location, rating, comment } = ctx.request.body
+    const latlng = [location.latitude, location.longitude]
+
+    const review = new Review({
+      juso: geocoder.getJusoByD(latlng),
+      location: { type: 'Point', coordinates: latlng },
+
+      rating,
+      message: comment,
+      timestamp: new Date(),
+      ip: ctx.request.ip
+    })
+
+    ctx.body = await review.save()
   })

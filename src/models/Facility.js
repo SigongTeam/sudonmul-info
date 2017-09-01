@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Location = require('./schema/Location')
 
 const Quality = mongoose.Schema({
   date: { type: Date, required: true },
@@ -10,8 +11,10 @@ const Quality = mongoose.Schema({
 const schema = mongoose.Schema({
   name: { type: String, required: true },
   number: { type: Number, required: true },
+
   juso: { type: String, required: true },
-  location: { type: String, coordinates: [Number], required: true },
+  location: { type: Location, required: true },
+
   qualities: { type: [Quality], required: true }
 })
 

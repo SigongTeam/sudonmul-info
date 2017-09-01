@@ -4,17 +4,17 @@
       <div class="graphs">
         <div class="progress-container">
           <div class="text">:(</div>
-          <div class="graph" ref="frown"></div>
+          <div class="graph frown" ref="frown"></div>
         </div>
 
         <div class="progress-container">
           <div class="text">:|</div>
-          <div class="graph" ref="norm"></div>
+          <div class="graph norm" ref="norm"></div>
         </div>
 
         <div class="progress-container">
           <div class="text">:)</div>
-          <div class="graph" ref="smile"></div>
+          <div class="graph smile" ref="smile"></div>
         </div>
       </div>
       <div class="stat-wrapper" v-if="indice">
@@ -37,16 +37,11 @@
 
 <style>
   @import "@vars";
-
   .graphs {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
     flex: 1;
-  }
-
-  .comment-list {
-    background: #fff;
   }
 
   hr {
@@ -55,6 +50,7 @@
 
   .stat {
     display: flex;
+    padding: 0 20px;
   }
 
   .stat-wrapper {
@@ -88,6 +84,18 @@
       height: 20px;
       width: 0;
       transition: width 2s ease;
+
+      &.smile {
+        background: var(--smile-color);
+      }
+
+      &.norm {
+        background: var(--norm-color);
+      }
+
+      &.frown {
+        background: var(--frown-color);
+      }
     }
   }
 </style>
@@ -96,7 +104,7 @@
 import Comment from './Comment.vue'
 
 const emojiNames = ['frown', 'norm', 'smile']
-const gradeNames = ['매우 좋음', '좋음', '약간 좋음', '그럭저럭', '약간 좋지 않음', '좋지 않음', '매우 좋지 않음']
+const gradeNames = ['매우 좋지 않음', '좋지 않음', '약간 좋지 않음', '그럭저럭', '약간 좋음', '좋음', '매우 좋음']
 
 export default {
   props: {
