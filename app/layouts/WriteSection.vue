@@ -2,14 +2,14 @@
   <tap-section class="write-section" :class="{finished}">
     <h2>수돗물 평가하기</h2>
     <div class="button-wrapper">
-      <tap-button @click="open('smile')">:)</tap-button>
-      <tap-button @click="open('norm')">:|</tap-button>
-      <tap-button @click="open('frown')">:(</tap-button>
+      <tap-button @click="open(2)">:)</tap-button>
+      <tap-button @click="open(1)">:|</tap-button>
+      <tap-button @click="open(0)">:(</tap-button>
     </div>
     <modal :opened="openStatus" @close="close" class="modal">
       <div class="modal-inner">
-        <textarea placeholder="자세한 리뷰를 남겨주세요! (선택사항)"></textarea>
-        <button class="send" @click="send">
+        <textarea placeholder="자세한 리뷰를 남겨주세요! (선택사항)" v-model="comment"></textarea>
+        <button class="send" @click="send(opened)">
           <icon icon="send"></icon>
         </button>
       </div>
@@ -64,13 +64,14 @@
 </style>
 
 <script>
+import Geolocation from '../js/geolocation.js'
 import Icon from '../components/Icon.vue'
 import Modal from '../components/Modal.vue'
 import TapButton from '../components/TapButton.vue'
 import TapSection from '../components/TapSection.vue'
 
 export default {
-  data: () => ({opened: false, supportsWriting: true, finished: false}),
+  data: () => ({opened: false, supportsWriting: true, finished: false, comment: ''}),
 
   components: {
     Icon,
@@ -84,7 +85,7 @@ export default {
       if (this.supportsWriting) {
         this.opened = name
       } else {
-        this.send()
+        this.send(name)
       }
     },
 
@@ -92,8 +93,23 @@ export default {
       this.opened = false
     },
 
-    send () {
-      // TODO send with geoloc, content
+    send (rating) {
+      const location = await Geolocation.getParsedPosition();
+
+      const data = {
+        location,
+        rating,
+        comment: this.comment
+      }
+
+      await fetch('/review', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+
       this.close()
       if (this.supportsWriting) {
         this.finished = true
