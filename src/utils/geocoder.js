@@ -1,37 +1,49 @@
-// const Kwater = require('k-live-water')
-const rp = require('request-promise')
+const axios = require('axios')
 const ENDPOINT_URI = 'https://maps.googleapis.com/maps/api/geocode/json'
 
 module.exports = class Geocoder {
-  constructor ({ key }) {
-    this.key = key
+  constructor () {
+    this.instance = axios.create({ baseURL: ENDPOINT_URI })
+  }
+
+  async get (params) {
+    const { data } = await this.instance.get({ params })
+
+    if (!data || !data.results || !data.status) {
+      throw new Error('Unexpected response data from geocode')
+    }
+
+    if (data.status !== 'OK') {
+      throw new Error(`Unexpected response code '${data.status}'`)
+    }
+
+    return data
   }
 
   /**
    * @param {String} juso 도로명 주소
+   * @return {Array} dcode
    */
-  async fetchGeocode (juso) {
-    const r = await rp({
-      uri: ENDPOINT_URI,
-      qs: {
-        address: juso,
-        key: this.key
-      }
+  async getDByJuso (juso) {
+    const data = await this.get({
+      address: juso
     })
 
-    const body = JSON.parse(r)
+    const result = data.results[0]
+    const { lat, lng } = result.geometry.location
 
-    if (!body || !body.results || !body.status) {
-      throw new Error('Unexpected response data from geocode')
-    }
+    return [lat, lng]
+  }
 
-    if (body.status === 'OK') {
-      const result = body.results[0]
-      const {lat, lng} = result.geometry.location
+  /**
+   * @param {Array} dCode
+   */
+  async getJusoByD (dCode) {
+    const data = await this.get({
+      latlng: dCode
+    })
 
-      return {lat, lng}
-    }
-
-    throw new Error(`Unexpected response code "${body.status}"`)
+    const result = data.results[0]
+    return result.formatted_address
   }
 }

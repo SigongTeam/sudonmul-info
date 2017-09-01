@@ -61,6 +61,7 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "babel-polyfill": "^6.26.0",
     "boom": "^5.2.0",
     "concurrently": "^3.5.0",

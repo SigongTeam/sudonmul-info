@@ -7,4 +7,4 @@ const facility = () => new Facility({
 
 module.exports = () => Promise
   .all([...Array(count)].map(facility).map(r => r.save()))
-  .then(() => console.log(`Created ${count} dummy data`))
+  .then(() => console.log(`Created ${count} dummy data for facility`))
