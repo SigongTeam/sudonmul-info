@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="section-wrapper" :class="{centered}">
+    <div class="section-wrapper" :style="innerStyle" :class="{centered}">
       <slot></slot>
     </div>
   </section>
@@ -34,6 +34,11 @@ export default {
   props: {
     centered: {
       type: Boolean
+    },
+
+    innerStyle: {
+      type: String,
+      default: ''
     }
   }
 }

@@ -2,6 +2,9 @@
   --header-background: #222831;
   --write-background: #393E46;
   --review-background: #00ADB5;
+  --frown-color: #ff5722;
+  --norm-color: #ffc107;
+  --smile-color: #00adb5;
   --font: 'Spoqa Han Sans', sans-serif;
   --section-width: 768px;
 }

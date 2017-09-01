@@ -1,5 +1,5 @@
 <template>
-  <tap-section class="review-section">
+  <tap-section class="review-section" innerStyle="background: #fff; margin-top: 30px; margin-bottom: 30px">
     <h2>리뷰</h2>
     <comment-view :comments="reviews"></comment-view>
   </tap-section>
@@ -12,6 +12,7 @@
 
     & h2 {
       font-weight: 600;
+      padding: 0 20px;
     }
   }
 </style>
