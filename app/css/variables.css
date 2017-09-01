@@ -1,6 +1,7 @@
 :root {
-  --header-background: #0c4762;
-  --review-background: #51dacf;
+  --header-background: #222831;
+  --write-background: #393E46;
+  --review-background: #00ADB5;
   --font: 'Spoqa Han Sans', sans-serif;
   --section-width: 768px;
 }

@@ -1,6 +1,6 @@
 <template>
   <tap-section class="main-header" centered>
-    <icon icon="information-outline"></icon> 수돈물
+    <img src="../img/logo.svg" alt="Logo">
   </tap-section>
 </template>
 
@@ -8,9 +8,13 @@
   @import "@vars";
   .main-header {
     background-color: var(--header-background);
-    height: 20vh;
-    font-size: 5rem;
+    height: 10vh;
+    font-size: 4rem;
     color: #fff;
+
+    & img {
+      height: calc(10vh - 20px);
+    }
   }
 </style>
 

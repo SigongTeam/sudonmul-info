@@ -1,22 +1,25 @@
 <template>
   <section class="comment-view">
-    <div class="graphs">
-      <div class="progress-container">
-        <div class="graph" ref="frown">
+    <div class="stat">
+      <div class="graphs">
+        <div class="progress-container">
           <div class="text">:(</div>
+          <div class="graph" ref="frown"></div>
         </div>
-      </div>
 
-      <div class="progress-container">
-        <div class="graph" ref="norm">
+        <div class="progress-container">
           <div class="text">:|</div>
+          <div class="graph" ref="norm"></div>
+        </div>
+
+        <div class="progress-container">
+          <div class="text">:)</div>
+          <div class="graph" ref="smile"></div>
         </div>
       </div>
-
-      <div class="progress-container">
-        <div class="graph" ref="smile">
-          <div class="text">:)</div>
-        </div>
+      <div class="stat-wrapper" v-if="indice">
+        <div class="stat-grade">{{indiceGrade}}</div>
+        <div class="stat-text">{{indiceText}}</div>
       </div>
     </div>
 
@@ -37,7 +40,9 @@
 
   .graphs {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 20px;
+    flex: 1;
   }
 
   .comment-list {
@@ -48,36 +53,50 @@
     margin: 0 .1rem;
   }
 
-  .progress-container .graph {
-    flex: 1;
-    padding: 20px;
+  .stat {
+    display: flex;
+  }
+
+  .stat-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-text {
+    font-size: 5rem;
+    font-weight: 600;
+  }
+
+  .stat-grade {
+    font-size: 1.7rem;
+  }
+
+  .progress-container {
     position: relative;
+    display: flex;
+    align-items: center;
 
     & .text {
-      display: inline-block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 7rem;
+      font-size: 3rem;
       font-weight: 600;
+      width: 30px;
+    }
+
+    & .graph {
+      background: #2f493e;
+      margin-left: 20px;
+      height: 20px;
+      width: 0;
+      transition: width 2s ease;
     }
   }
 </style>
 
 <script>
 import Comment from './Comment.vue'
-import ProgressBar from 'progressbar.js'
 
 const emojiNames = ['frown', 'norm', 'smile']
-const options = {
-  color: '#2f493e',
-  strokeWidth: 4,
-  trailWidth: 1,
-  duration: 1400,
-  easing: 'easeInOut',
-  text: { autoStyleContainer: false }
-}
+const gradeNames = ['매우 좋음', '좋음', '약간 좋음', '그럭저럭', '약간 좋지 않음', '좋지 않음', '매우 좋지 않음']
 
 export default {
   props: {
@@ -93,15 +112,37 @@ export default {
     Comment
   },
 
-  mounted () {
-    emojiNames.forEach((emoji, rating) =>
-      (this.bars[rating] = new ProgressBar.Circle(this.$refs[emoji], options)))
+  methods: {
+    getRatings (rating) {
+      return this.comments.filter(c => c.rating === rating).length
+    }
+  },
+
+  computed: {
+    indice () {
+      let indice = 0
+      emojiNames.forEach((emoji, rating) => {
+        // Rating = Coefficient, Indice -> Min: 0, Max: comments.length * 2;
+        indice += this.getRatings(rating) * rating
+      })
+
+      return (indice / (this.comments.length * 2)) * 100
+    },
+
+    indiceText () {
+      return `${Math.round(this.indice)}%`
+    },
+
+    indiceGrade () {
+      return gradeNames[Math.min(gradeNames.length - 1, Math.floor(this.indice / 100 * gradeNames.length))]
+    }
   },
 
   updated () {
-    this.bars.forEach((bar, rating) => {
+    emojiNames.forEach((emoji, rating) => {
       const sameRatings = this.comments.filter(c => c.rating === rating)
-      bar.animate(sameRatings.length / this.comments.length)
+      const percentage = (sameRatings.length / this.comments.length) * 100
+      this.$refs[emoji].style.width = `${percentage}%`
     })
   }
 }
