@@ -10,12 +10,13 @@ const timestamps = require('./timestamps')
 const { geocoder } = require('../utils')
 
 const review = async () => {
-  const juso = jusos()
-  const dCode = await geocoder.getDByJuso(juso)
-  const location = { type: 'Point', coordinates: dCode }
+  const dCode = await geocoder.getDByJuso(jusos())
 
   const results = await Facility.mulloc(dCode)
   const facilityName = results[0].obj.name
+
+  const juso = await geocoder.getJusoByD(dCode)
+  const location = { type: 'Point', coordinates: dCode }
 
   const review = new Review({
     juso,
