@@ -76,7 +76,7 @@ const devServer = {
   port: 8888,
   host: '0.0.0.0',
   historyApiFallback: true,
-  proxy: { '**': `http://127.0.0.1:8080` }
+  proxy: { '**': { target: `https://127.0.0.1:8080`, secure: false } }
 }
 
 export default {

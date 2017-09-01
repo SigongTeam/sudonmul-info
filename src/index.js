@@ -13,6 +13,10 @@ const logger = require('koa-chalk-logger')
 const bodyParser = require('koa-bodyparser')
 const conditional = require('koa-conditional-get')
 
+const fs = require('fs')
+const https = require('https')
+const enforceHttps = require('koa-sslify')
+
 async function connectDatabase () {
   mongoose.Promise = global.Promise
 
@@ -29,14 +33,26 @@ function startApp () {
   const port = process.env.PORT || 8080
   const dist = path.join(__dirname, '..', 'dist')
 
-  return new Koa()
+  const app = new Koa()
+
+  app
     .use(logger())
     .use(conditional())
     .use(etag())
     .use(bodyParser())
     .use(boom())
+    .use(enforceHttps())
     .use(routes())
     .use(serve(dist, { maxage: 1000 * 60 * 30 }))
+
+  const options = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem'),
+    rejectUnauthorized: false
+  }
+
+  https
+    .createServer(options, app.callback())
     .listen(port, () => console.log(`Listening on port ${port}`))
 }
 
