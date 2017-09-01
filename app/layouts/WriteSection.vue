@@ -104,7 +104,7 @@ export default {
         comment: this.comment
       }
 
-      await axios.post('/review', { data })
+      await axios.post('/review', data)
 
       this.close()
       if (this.supportsWriting) {
