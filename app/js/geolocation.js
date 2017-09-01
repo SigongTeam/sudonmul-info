@@ -1,4 +1,4 @@
-class Geolocation {
+export default class Geolocation {
   static async getParsedPosition () {
     const position = await this.getCurrentPosition()
     return this.parsePosition(position)
@@ -30,5 +30,3 @@ class Geolocation {
     }
   }
 }
-
-export default Geolocation

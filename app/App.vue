@@ -24,12 +24,6 @@ export default {
     MainHeader,
     ReviewSection,
     WriteSection
-  },
-
-  async created () {
-    getCurrentPosition()
-      .then(sendPosition)
-      .catch(err => alert('Geolocation error: ' + err.message))
   }
 }
 </script>

@@ -64,7 +64,9 @@
 </style>
 
 <script>
-import Geolocation from '../js/geolocation.js'
+import axios from 'axios'
+import Geolocation from '../js/geolocation'
+
 import Icon from '../components/Icon.vue'
 import Modal from '../components/Modal.vue'
 import TapButton from '../components/TapButton.vue'
@@ -93,8 +95,8 @@ export default {
       this.opened = false
     },
 
-    send (rating) {
-      const location = await Geolocation.getParsedPosition();
+    async send (rating) {
+      const location = await Geolocation.getParsedPosition()
 
       const data = {
         location,
@@ -102,13 +104,7 @@ export default {
         comment: this.comment
       }
 
-      await fetch('/review', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
+      await axios.post('/review', { data })
 
       this.close()
       if (this.supportsWriting) {
