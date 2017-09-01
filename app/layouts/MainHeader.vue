@@ -16,7 +16,7 @@
 
     & .header-link {
       display: flex;
-      
+
       & img {
         height: calc(10vh - 20px);
       }
