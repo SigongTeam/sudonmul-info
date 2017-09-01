@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 
 const schema = mongoose.Schema({
-  location: { type: String, index: true },
+  juso: { type: String, required: true },
+  location: { type: String, coordinates: [Number], required: true },
+
   rating: { type: Number, index: true },
   timestamp: { type: Date, index: true },
 
