@@ -2,12 +2,8 @@ const axios = require('axios')
 const ENDPOINT_URI = 'https://maps.googleapis.com/maps/api/geocode/json'
 
 module.exports = class Geocoder {
-  constructor () {
-    this.instance = axios.create({ baseURL: ENDPOINT_URI })
-  }
-
   async get (params) {
-    const { data } = await this.instance.get({ params })
+    const { data } = await axios.get(ENDPOINT_URI, { params })
 
     if (!data || !data.results || !data.status) {
       throw new Error('Unexpected response data from geocode')
