@@ -11,7 +11,7 @@
 
   .main-header {
     background-color: var(--header-background);
-    height: 10vh;
+    height: 60px;
     font-size: 4rem;
     color: #fff;
 
@@ -19,7 +19,7 @@
       display: flex;
 
       & img {
-        height: calc(10vh - 20px);
+        height: 40px;
       }
     }
   }
