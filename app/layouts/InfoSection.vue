@@ -1,6 +1,6 @@
 <template>
   <tap-section class="info-section" :class="{opened}">
-    <h1>절약량</h1>
+    <h1>절약</h1>
     <div>
       수돗물을 300mL 마실 때마다 약 {{ beautifyNum(saved) }}원이 절약됩니다.<br>
       1회 300mL 기준, 지금까지 총 {{ beautifyNum(whole) }}원을 절약하셨습니다.
