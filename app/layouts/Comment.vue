@@ -69,6 +69,9 @@
 
 <script>
 import moment from 'moment'
+import 'moment/locale/ko'
+
+moment.locale('ko')
 
 export default {
   props: {
