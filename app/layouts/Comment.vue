@@ -11,7 +11,7 @@
         </div>
 
         <div class="message">
-          {{message}}
+          {{message || '(추가 정보 없음)'}}
         </div>
       </div>
     </div>
