@@ -9,8 +9,8 @@ const Quality = mongoose.Schema({
 })
 
 const schema = mongoose.Schema({
-  name: { type: String, required: true },
-  number: { type: Number, required: true },
+  name: { type: String, required: true, unique: true },
+  number: { type: Number, required: true, unique: true },
 
   juso: { type: String, required: true },
   location: { type: Location, required: true },
