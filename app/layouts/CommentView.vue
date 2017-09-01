@@ -29,7 +29,8 @@
         :key="comment._id"
         :rating="comment.rating"
         :message="comment.message"
-        :timestamp="comment.timestamp">
+        :timestamp="comment.timestamp"
+        :juso="comment.juso">
       </comment>
     </div>
   </section>

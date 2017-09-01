@@ -13,6 +13,10 @@
         <div class="message">
           {{message || '(추가 정보 없음)'}}
         </div>
+
+        <div class="juso">
+          {{ juso }}
+        </div>
       </div>
     </div>
     <hr>
@@ -52,6 +56,11 @@
       font-size: 1.4rem;
     }
 
+    & .juso {
+      font-size: 1.2rem;
+      color: #777;
+    }
+
     & .timestamp {
       font-size: 1rem;
     }
@@ -74,6 +83,11 @@ export default {
     },
 
     timestamp: {
+      type: String,
+      required: true
+    },
+
+    juso: {
       type: String,
       required: true
     }

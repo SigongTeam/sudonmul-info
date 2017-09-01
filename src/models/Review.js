@@ -20,18 +20,23 @@ schema.statics = {
     const location = JSON.parse(ctx.query.location)
     const dCode = [location.latitude, location.longitude]
 
-    const { name: facilityName } = await Facility.mulloc(dCode)
+    const results = await Facility.mulloc(dCode)
+    const facilityName = results[0].obj.name
+
     ctx.body = await this.find({ facilityName }).sort('-timestamp').limit(30).exec()
   },
 
   async postReview (ctx) {
     const { location, rating, comment } = ctx.request.body
+
     const latlng = [location.latitude, location.longitude]
+    const results = await Facility.mulloc(latlng)
+    const facilityName = results[0].obj.name
 
     const review = new this({
       juso: await geocoder.getJusoByD(latlng),
       location: { type: 'Point', coordinates: latlng },
-      facilityName: await Facility.mulloc(location),
+      facilityName,
       rating,
       message: comment,
       timestamp: new Date(),

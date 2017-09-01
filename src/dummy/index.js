@@ -1,5 +1,6 @@
-const count = 2
+const count = 10
 const Review = require('../models/Review')
+const Facility = require('../models/Facility')
 
 const ips = require('./ips')
 const jusos = require('./jusos')
@@ -13,9 +14,14 @@ const review = async () => {
   const dCode = await geocoder.getDByJuso(juso)
   const location = { type: 'Point', coordinates: dCode }
 
+  const results = await Facility.mulloc(dCode)
+  const facilityName = results[0].obj.name
+
   const review = new Review({
     juso,
     location,
+    facilityName,
+
     ip: ips(),
     rating: ratings(),
     message: messages(),

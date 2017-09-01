@@ -58,3 +58,4 @@ function startApp () {
 
 connectDatabase()
   .then(startApp)
+  // .then(require('./dummy'))

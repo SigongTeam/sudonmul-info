@@ -6,7 +6,9 @@ const jusos = [
   '수원시 영통구 원천동',
   '경기도 안성시 금광면',
   '경상북도 상주시 공성면',
-  '충청남도 금산군 남이면'
+  '충청남도 금산군 남이면',
+  '대구광역시 북구 산격동',
+  '대구광역시 북구 대현동'
 ]
 
 module.exports = () => jusos[Math.floor(Math.random() * jusos.length)]
