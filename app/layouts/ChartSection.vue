@@ -13,7 +13,7 @@
     & h1 {
       font-weight: 600;
     }
-    
+
     & canvas {
       width: 100%;
       margin: 0 auto;
