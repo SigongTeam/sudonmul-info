@@ -16,8 +16,11 @@ module.exports = new Router({ prefix: '/facility' })
       limit: 1
     }))
 
+    const f = results[0].obj
+
     ctx.body = {
-      qualities: results[0].obj.qualities,
-      name: results[0].obj.name
+      name: f.name,
+      juso: f.juso,
+      qualities: f.qualities
     }
   })
