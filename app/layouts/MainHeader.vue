@@ -1,7 +1,7 @@
 <template>
   <tap-section class="main-header" centered>
     <a class="header-link" href="/">
-      <img src="../img/logo.svg" alt="Logo">
+      <img src="../img/logo_fullwidth.svg" alt="Logo">
     </a>
   </tap-section>
 </template>
