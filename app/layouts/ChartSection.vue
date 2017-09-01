@@ -8,6 +8,13 @@
 <style scoped>
   .chart-section {
     background: #eeeeee;
+
+    & canvas {
+      width: calc(100vw - 40px);
+      max-width: 400px;
+      height: calc(100vw - 40px);
+      max-height: 400px;
+    }
   }
 </style>
 
@@ -16,6 +23,7 @@ import axios from 'axios'
 import Chart from 'chart.js'
 import Geolocation from '../js/geolocation'
 import moment from 'moment'
+import TapSection from '../components/TapSection.vue'
 
 const config = {
   type: 'line',
@@ -86,6 +94,10 @@ export default {
 
     res.data.forEach((v) => ['tbVal', 'clVal', 'phVal'].forEach((k, i) => config.data.datasets[i].data.push(v[k])))
     this.chart = new Chart(this.$refs.canvas.getContext('2d'), config)
+  },
+
+  components: {
+    TapSection
   }
 }
 </script>
